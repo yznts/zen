@@ -8,7 +8,7 @@ func Range(from, to int) []int {
 	return a
 }
 
-func In[T comparable](val T, slice []T) bool {
+func In(val any, slice []any) bool {
 	for _, v := range slice {
 		if v == val {
 			return true

@@ -48,6 +48,9 @@ func FuncMap() template.FuncMap {
 		"timeNowDay":   func() int { return time.Now().Day() },
 		"timeNowMonth": func() int { return int(time.Now().Month()) },
 		"timeNowYear":  func() int { return time.Now().Year() },
+		// Range
+		"rng": Range,
+		"in":  In,
 		// Environment
 		"env": os.Getenv,
 	}

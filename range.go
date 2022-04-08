@@ -42,7 +42,17 @@ func Range(from, to int) []int {
 //
 // Usage:
 // 	In(1, []int{1, 2, 3}) // true
-func In(val any, slice []any) bool {
+func In[T comparable](val T, slice []T) bool {
+	for _, v := range slice {
+		if v == val {
+			return true
+		}
+	}
+	return false
+}
+
+// InRuntime is a runtime analogue of In (made to be compatible with templates).
+func InRuntime(val any, slice []any) bool {
 	for _, v := range slice {
 		if v == val {
 			return true

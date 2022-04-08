@@ -50,7 +50,7 @@ func FuncMap() template.FuncMap {
 		"date": func(format string) string { return time.Now().Format(format) },
 		// Range
 		"rng": Range,
-		"in":  In,
+		"in":  InRuntime,
 		// Environment
 		"env": os.Getenv,
 	}

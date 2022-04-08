@@ -2,7 +2,10 @@ package zen
 
 import "golang.org/x/exp/constraints"
 
-// Min returns the minimum value of the given values
+// Min returns the minimum value of the given values.
+//
+// Usage:
+//  zen.Min(1, 2, 3, slice...) // 1
 func Min[T constraints.Ordered](vals ...T) T {
 	if len(vals) == 0 {
 		panic("Min() called with no arguments")
@@ -16,7 +19,10 @@ func Min[T constraints.Ordered](vals ...T) T {
 	return min
 }
 
-// Max returns the maximum value of the given values
+// Max returns the maximum value of the given values.
+//
+// Usage:
+//  zen.Max(1, 2, 3, slice...) // 3
 func Max[T constraints.Ordered](vals ...T) T {
 	if len(vals) == 0 {
 		panic("Max() called with no arguments")
@@ -30,7 +36,10 @@ func Max[T constraints.Ordered](vals ...T) T {
 	return max
 }
 
-// Avg returns the average value of the given values
+// Avg returns the average value of the given values.
+//
+// Usage:
+//  zen.Avg(1, 2, 3, slice...) // 2
 func Avg[T constraints.Integer | constraints.Float](vals ...T) T {
 	if len(vals) == 0 {
 		panic("Avg() called with no arguments")

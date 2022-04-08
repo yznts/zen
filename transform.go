@@ -7,12 +7,18 @@ import (
 	"strconv"
 )
 
-// Ptr makes a pointer to the given value
+// Ptr makes a pointer to the given value.
+//
+// Usage:
+//  zen.Ptr(1) // *int 1
 func Ptr[T any](val T) *T {
 	return &val
 }
 
-// Int converts the given value to a boolean
+// Int converts the given value to a boolean.
+//
+// Usage:
+//  zen.Bool(4.5) // true
 func Bool(val any) bool {
 	switch val := val.(type) {
 	case bool:
@@ -26,7 +32,10 @@ func Bool(val any) bool {
 	}
 }
 
-// Int converts the given value to an integeter
+// Int converts the given value to an integeter.
+//
+// Usage:
+//  zen.Int("123") // 123
 func Int(val any) int {
 	switch val := val.(type) {
 	case bool:
@@ -69,7 +78,10 @@ func Int(val any) int {
 	}
 }
 
-// Float64 converts the given value to a float64
+// Float64 converts the given value to a float64.
+//
+// Usage:
+//  zen.Float64("5") // 5.0
 func Float64(val any) float64 {
 	switch val := val.(type) {
 	case bool:
@@ -112,7 +124,10 @@ func Float64(val any) float64 {
 	}
 }
 
-// String converts the given value to a string
+// String converts the given value to a string.
+//
+// Usage:
+//  zen.String(1) // "1"
 func String(val any) string {
 	switch val := val.(type) {
 	case bool:
@@ -131,10 +146,12 @@ func String(val any) string {
 // Compose makes a map with the given keys and values.
 // Useful as a template function to pass multiple values to a template.
 // Based on even and odd values.
-// Example usage (Go):
-// zen.Compose("foo", 1, "bar", 2) -> map[any]any{"foo": 1, "bar": 2}
-// Example usage (Template):
-// {{ compose "foo" 1 "bar" 2 }}
+//
+// Usage:
+//  // Code
+//  zen.Compose("foo", 1, "bar", 2) // map[any]any{"foo": 1, "bar": 2}
+//  // Template
+//  {{ compose "foo" 1 "bar" 2 }}
 func Compose(vals ...any) map[any]any {
 	m := make(map[any]any)
 	for i := 0; i < len(vals); i += 2 {
@@ -145,8 +162,12 @@ func Compose(vals ...any) map[any]any {
 
 // JSON is a function that converts the given value to a JSON string.
 // Useful as a template function.
-// Example usage (Go):
-// zen.JSON(map[any]any{"foo": 1, "bar": 2}) -> {"foo":1,"bar":2}
+//
+// Usage:
+//  // Code
+//  zen.JSON(map[any]any{"foo": 1, "bar": 2}) // {"foo":1,"bar":2}
+//  // Template
+//  {{ json .Value }}
 func JSON(val any) string {
 	content, err := json.Marshal(val)
 	if err != nil {
@@ -155,7 +176,13 @@ func JSON(val any) string {
 	return string(content)
 }
 
-// B64Enc converts the given value (bytes or string) to a base64 string
+// B64Enc converts the given value (bytes or string) to a base64 string.
+//
+// Usage:
+//  // Code
+//  zen.B64Enc([]byte("foo")) // "Zm9v"
+//  Template
+//  {{ b64enc "foo" }}
 func B64Enc(val any) string {
 	switch val := val.(type) {
 	case []byte:
@@ -168,6 +195,12 @@ func B64Enc(val any) string {
 }
 
 // B64Dec converts the given base64 string to a value (bytes)
+//
+// Usage:
+//  // Code
+//  zen.B64Dec("Zm9v") // []byte("foo")
+//  // Template
+//  {{ b64dec "Zm9v" }}
 func B64Dec(val string) []byte {
 	data, err := base64.StdEncoding.DecodeString(val)
 	if err != nil {

@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// FuncMap is a map of functions to be used in templates.
 func FuncMap() template.FuncMap {
 	return template.FuncMap{
 		// Cast

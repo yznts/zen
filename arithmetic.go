@@ -4,8 +4,17 @@ import (
 	"golang.org/x/exp/constraints"
 )
 
-// Sum returns the sum of the given values
+// Sum returns the sum of the given values.
+//
+// Usage:
+//  // Code
+//  zen.Sum(1, 2, 3, slice...) // 6
+//  // Templates
+//  {{ sum 1 2 3 }} // 6
 func Sum[T constraints.Integer | constraints.Float | string](vals ...T) T {
+	if len(vals) < 2 {
+		panic("Sum() requires at least 2 arguments")
+	}
 	var sum T
 	for _, val := range vals {
 		sum += val
@@ -13,7 +22,7 @@ func Sum[T constraints.Integer | constraints.Float | string](vals ...T) T {
 	return sum
 }
 
-// SumRuntime is a runtime analogue of Sum (made to be compatible with templates)
+// SumRuntime is a runtime analogue of Sum (made to be compatible with templates).
 func SumRuntime(vals ...any) any {
 	switch vals[0].(type) {
 	case int:
@@ -47,8 +56,17 @@ func SumRuntime(vals ...any) any {
 	}
 }
 
-// Sub returns the subtraction of the given values from the first one
+// Sub returns the subtraction of the given values from the first one.
+//
+// Usage:
+//  // Code
+//  zen.Sub(3, 2, 1, slice...) // 0
+//  // Templates
+//  {{ sub 3 2 1 }} // 0
 func Sub[T constraints.Integer | constraints.Float](vals ...T) T {
+	if len(vals) < 2 {
+		panic("Sub() requires at least 2 arguments")
+	}
 	var sub T = vals[0]
 	for _, val := range vals[1:] {
 		sub -= val
@@ -56,7 +74,7 @@ func Sub[T constraints.Integer | constraints.Float](vals ...T) T {
 	return sub
 }
 
-// SubRuntime is a runtime analogue of Sub (made to be compatible with templates)
+// SubRuntime is a runtime analogue of Sub (made to be compatible with templates).
 func SubRuntime(vals ...any) any {
 	switch vals[0].(type) {
 	case int:
@@ -88,8 +106,17 @@ func SubRuntime(vals ...any) any {
 	}
 }
 
-// Mul returns the multiplication of the given values
+// Mul returns the multiplication of the given values.
+//
+// Usage:
+//  // Code
+//  zen.Mul(1, 2, 3, slice...) // 6
+//  // Templates
+//  {{ mul 1 2 3 }} // 6
 func Mul[T constraints.Integer | constraints.Float](vals ...T) T {
+	if len(vals) < 2 {
+		panic("Mul() requires at least 2 arguments")
+	}
 	var mul T = vals[0]
 	for _, val := range vals[1:] {
 		mul *= val
@@ -97,7 +124,7 @@ func Mul[T constraints.Integer | constraints.Float](vals ...T) T {
 	return mul
 }
 
-// MulRuntime is a runtime analogue of Mul (made to be compatible with templates)
+// MulRuntime is a runtime analogue of Mul (made to be compatible with templates).
 func MulRuntime(vals ...any) any {
 	switch vals[0].(type) {
 	case int:
@@ -129,8 +156,17 @@ func MulRuntime(vals ...any) any {
 	}
 }
 
-// Div returns the division of the given values to the first one
+// Div returns the division of the given values to the first one.
+//
+// Usage:
+//  // Code
+//  zen.Div(3, 2, 1, slice...) // 1.5
+//  // Templates
+//  {{ sum 3 2 1 }} // 1.5
 func Div[T constraints.Integer | constraints.Float](vals ...T) T {
+	if len(vals) < 2 {
+		panic("Div() requires at least 2 arguments")
+	}
 	var div T = vals[0]
 	for _, val := range vals[1:] {
 		div /= val
@@ -138,7 +174,7 @@ func Div[T constraints.Integer | constraints.Float](vals ...T) T {
 	return div
 }
 
-// DivRuntime is a runtime analogue of Div (made to be compatible with templates)
+// DivRuntime is a runtime analogue of Div (made to be compatible with templates).
 func DivRuntime(vals ...any) any {
 	switch vals[0].(type) {
 	case int:

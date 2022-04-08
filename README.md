@@ -16,6 +16,7 @@ Would be nice to include this functions as a part of kyoto project.
 - Transform (Ptr, Bool, Int, Float64, String, JSON, B64Enc, B64Dec, Compose)
 - Slice casting (CastSlice)
 - Number formatting (FormatNumber, FormatNumberNumeral)
+- Range functions (Filter, Map, Range, In)
 - Templates specific functions (type casting, composition, string operations, etc)
 
 ## Documentation

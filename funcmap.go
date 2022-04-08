@@ -45,9 +45,8 @@ func FuncMap() template.FuncMap {
 		"numeralP0": FormatNumberNumeralP0,
 		"numeralP1": FormatNumberNumeralP1,
 		// Time
-		"timeNowDay":   func() int { return time.Now().Day() },
-		"timeNowMonth": func() int { return int(time.Now().Month()) },
-		"timeNowYear":  func() int { return time.Now().Year() },
+		"now":  func() time.Time { return time.Now() },
+		"date": func(format string) string { return time.Now().Format(format) },
 		// Range
 		"rng": Range,
 		"in":  In,

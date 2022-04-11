@@ -6,7 +6,7 @@ package zen
 // Usage:
 //  zen.CastSlice[int]([]any{1, 2, 3}) // []int{1, 2, 3}
 func CastSlice[T any](slice []any) []T {
-	_slice := make([]T, len(slice))
+	_slice := make([]T, 0, len(slice))
 	for _, el := range slice {
 		_slice = append(_slice, el.(T))
 	}
@@ -19,7 +19,7 @@ func CastSlice[T any](slice []any) []T {
 // Usage:
 //  zen.CastPSlice(int)([]any{1, 2, nil}) []*int{1, 2, nil}
 func CastPSlice[T any](slice []any) []*T {
-	_slice := make([]*T, len(slice))
+	_slice := make([]*T, 0, len(slice))
 	for _, v := range slice {
 		if v == nil {
 			_slice = append(_slice, nil)

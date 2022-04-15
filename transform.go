@@ -27,6 +27,8 @@ func Bool(val any) bool {
 		return val != 0
 	case string:
 		return val != ""
+	case nil:
+		return false
 	default:
 		panic("unknown type for Bool()")
 	}
@@ -73,6 +75,8 @@ func Int(val any) int {
 			panic(err)
 		}
 		return i
+	case nil:
+		return 0
 	default:
 		panic("unknown type for Int()")
 	}
@@ -119,6 +123,8 @@ func Float64(val any) float64 {
 			panic(err)
 		}
 		return float64(i)
+	case nil:
+		return 0
 	default:
 		panic("unknown type for Float64()")
 	}
@@ -138,6 +144,8 @@ func String(val any) string {
 		return fmt.Sprintf("%f", val)
 	case string:
 		return val
+	case nil:
+		return ""
 	default:
 		return fmt.Sprintf("%v", val)
 	}

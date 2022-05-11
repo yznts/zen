@@ -84,3 +84,51 @@ func InRuntime(val any, slice any) bool {
 		panic("unknown type for InRuntime()")
 	}
 }
+
+func Pop[T any](slice []T, index ...int) ([]T, T) {
+	// If index is not specified, pop last element
+	if len(index) == 0 {
+		index = append(index, len(slice)-1)
+	}
+	// If index is out of range, panic
+	if index[0] > len(slice)-1 {
+		panic("index out of range")
+	}
+	// Extract value
+	value := slice[index[0]]
+	// Truncate slice
+	tslice := append(slice[:index[0]], slice[index[0]+1:]...)
+	// Return value
+	return tslice, value
+}
+
+func Insert[T any](slice []T, index int, value T) []T {
+	if len(slice) == index {
+		return append(slice, value)
+	}
+	_slice := append(slice[:index+1], slice[index:]...)
+	_slice[index] = value
+	return _slice
+}
+
+func Last[T any](slice []T) T {
+	return slice[len(slice)-1]
+}
+
+func Any[T any](slice []T, fn func(v T) bool) bool {
+	for _, v := range slice {
+		if fn(v) {
+			return true
+		}
+	}
+	return false
+}
+
+func All[T any](slice []T, fn func(v T) bool) bool {
+	for _, v := range slice {
+		if !fn(v) {
+			return false
+		}
+	}
+	return true
+}

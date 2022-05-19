@@ -1,7 +1,7 @@
 
 # Zen
 
-Zen is a package that provides a set of commonly used functions, but missing from the standard library (for now).
+Zen is an utilities package that provides a set of commonly used functions, but missing from the standard library (for now).
 Most of the functions are adapted to be used with `html/template`.
 
 ## Motivation
@@ -21,4 +21,4 @@ Would be nice to include this functions as a part of kyoto project.
 
 ## Documentation
 
-Hmm...I don't think I'm ready for that. Please, use pkg.go.dev documentation for now.
+Code is well-documented, so it's pretty comfortable to use documentation provided by [pkg.go.dev](https://pkg.go.dev/github.com/kyoto-framework/zen)

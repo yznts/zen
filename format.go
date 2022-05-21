@@ -1,3 +1,21 @@
+/*
+	-
+
+	Format
+
+	Zen provides some useful formatting functions.
+
+	Examples:
+
+		func main() {
+			zen.FormatNumber(12345.456, 0, "$", "") // "$12,345"
+			zen.FormatNumberP0(12345.456) // "12,345"
+			zen.FormatNumberP1(12345.456) // "12,345.4"
+			zen.FormatNumberNumeral(12345.456, 0) // "12k"
+			zen.FormatNumberNumeralP0(12345.456) // "12k"
+			zen.FormatNumberNumeralP1(12345.456) // "12.3k"
+		}
+*/
 package zen
 
 import (

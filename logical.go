@@ -1,3 +1,17 @@
+/*
+	-
+
+	Logical
+
+	Logical expressions from another languages, but missing in Go.
+
+	Examples:
+
+		func main() {
+			// Go is not supporting "or" for values, like (0 || 1)
+			zen.Or("", "asd") // string{"asd"}
+		}
+*/
 package zen
 
 // Or acts like "||" for values in any other language.

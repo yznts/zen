@@ -3,7 +3,7 @@
 
 	Aggregative
 
-	Zen provides generic aggregative functions for slices.
+	Zen provides some generic aggregative functions for slices.
 
 */
 package zen

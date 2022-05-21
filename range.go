@@ -1,3 +1,41 @@
+/*
+	-
+
+	Range
+
+	Zen provides some generic functions for basic slice operations.
+
+	Examples:
+
+		func main() {
+			// Creating an integers slice with a Range function
+			var slice = zen.Range(1, 5) // []int{1, 2, 3, 4, 5}
+
+			// Filtering
+			zen.Filter(slice, func(v int) bool { return v < 3 }) // []int{1, 2}
+
+			// Creating a new slice, based on existing one with a Map function
+			zen.Map(slice, func(v int) int { return v * 2 }) // []int{2, 4, 6, 8, 10}
+
+			// Checking if an element is in the slice
+			zen.In(1, slice) // true
+
+			// Pop an element at the given index from the slice (returns a new slice and the value)
+			zen.Pop(slice, 1) // ([]int{1, 3, 4, 5}, 2)
+
+			// Insert an element at the given index in the slice (returns a new slice)
+			zen.Insert(slice, 1, 2) // []int{1, 2, 2, 3, 4, 5}
+
+			// Get the last element from the slice
+			zen.Last(slice) // 5
+
+			// Check if any element in the slice matches the given function
+			zen.Any(slice, func(v int) bool { return v == 2 }) // true
+
+			// Check if all elements in the slice match the given function
+			zen.All(slice, func(v int) bool { return v < 6 }) // true
+		}
+*/
 package zen
 
 // Filter returns filtered slice according to the given function.

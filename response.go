@@ -1,3 +1,25 @@
+/*
+	-
+
+	Response
+
+	Zen provides a *http.Response wrapper with a few useful extra methods.
+	It allows to operate with wrapped response in a more convenient way.
+	Check status code, dump response to stdout for debug, convert into map or decode directly into value.
+	Almost everything in single line of code.
+
+	Example:
+
+		func main() {
+			// Make a request
+			resp, err := http.Get("https://example.com/api/json")
+			if err != nil {
+				panic(err)
+			}
+			// Dump, check, convert to map
+			data := zen.Response(resp).Debug().Must().Map()
+		}
+*/
 package zen
 
 import (

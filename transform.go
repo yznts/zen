@@ -1,3 +1,33 @@
+/*
+	-
+
+	Transform
+
+	Zen provides a number of functions that can be used to transform
+	data into different types and forms.
+	Most of these functions are working with base data types.
+
+	Examples:
+
+		func main() {
+			// Common data types transformations
+			numptr := zen.Ptr(1) // *int{1}  Inline pointer
+			boolval := zen.Bool(3) // bool{true}
+			intval := zen.Int("5") // int{5}
+			floatval := zen.Float64("6.5") // float64{6.5}
+			strval := zen.String(7) // string{"7"}
+
+			// Map composition (useful for templates)
+			resmap := zen.Compose("foo", 1, "bar", "2") // map[any]any{"foo": 1, "bar": "2"}
+
+			// JSON
+			resjson := zen.JSON(resmap) // string{`{"foo": 1, "bar": "2"}`}
+
+			// Base64
+			resbase64 := zen.B64Enc(resjson) // string{`eyJmb28iOiAxLCAiYmFyIjogIjIifQ==`}
+			resbase64dec := string(zen.B64Dec(resbase64)) // string{`{"foo": 1, "bar": "2"}`}
+		}
+*/
 package zen
 
 import (

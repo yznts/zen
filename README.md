@@ -6,7 +6,7 @@ Most of the functions are adapted to be used with `html/template`.
 
 ## Motivation
 
-We had too much cases of copy-pasting the same code between projects over and over again.
+We had too many cases of copy-pasting the same code between projects over and over again.
 So I decided to combine it all in one place.
 
 ## Documentation

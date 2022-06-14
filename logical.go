@@ -10,6 +10,8 @@
 		func main() {
 			// Go is not supporting "or" for values, like (0 || 1)
 			zen.Or("", "asd") // string{"asd"}
+			// Go doesn't have "ternary" operator, like (true ? "asd" : "qwe")
+			zen.Tr(false, "asd", "qwe") // string{"qwe"}
 		}
 */
 package zen
@@ -25,4 +27,16 @@ func Or[T comparable](a, b T) T {
 		return a
 	}
 	return b
+}
+
+// Tr acts like a ternary operator in other languages.
+// Unfortuantely, Go doesn't have this operator.
+//
+// Usage:
+//  zen.Tr(false, "asd", "qwe") // string{"qwe"}
+func Tr[T comparable](condition bool, v1, v2 T) T {
+	if condition {
+		return v1
+	}
+	return v2
 }

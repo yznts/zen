@@ -153,6 +153,18 @@ func Last[T any](slice []T) T {
 	return slice[len(slice)-1]
 }
 
+func Chunks[T any](slice []T, size int) [][]T {
+	var chunks [][]T
+	for i := 0; i < len(slice); i += size {
+		end := i + size
+		if end > len(slice) {
+			end = len(slice)
+		}
+		chunks = append(chunks, slice[i:end])
+	}
+	return chunks
+}
+
 func Any[T any](slice []T, fn func(v T) bool) bool {
 	for _, v := range slice {
 		if fn(v) {

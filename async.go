@@ -57,6 +57,8 @@ func Async[T any](f func() (T, error)) Future[T] {
 		future.err = err
 		// Set value
 		future.value <- value
+		// Close value channel
+		close(future.value)
 	}()
 	// Return future
 	return future

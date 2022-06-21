@@ -12,7 +12,7 @@
 
 	Example:
 
-		func Foo() zen.Future[string] {
+		func Foo() *zen.Future[string] {
 			return zen.Async(func() (string, error) {
 				return "Bar", nil
 			})

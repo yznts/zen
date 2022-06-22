@@ -24,6 +24,7 @@ package zen
 
 import (
 	"encoding/json"
+	"io/ioutil"
 	"net/http"
 	"net/http/httputil"
 )
@@ -67,6 +68,16 @@ func (r *ResponseWrapper) Map() map[string]any {
 		panic("unsupported response type")
 	}
 	return data
+}
+
+// Text reads response body as a text.
+// If something wrong, it panics.
+func (r *ResponseWrapper) Text() string {
+	bts, err := ioutil.ReadAll(r.Response.Body)
+	if err != nil {
+		panic(err)
+	}
+	return string(bts)
 }
 
 // Decode detects response type and decodes it to target.

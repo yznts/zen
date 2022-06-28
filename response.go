@@ -32,14 +32,14 @@ import (
 // ResponseWrapper is a wrapper for http.Response.
 // It provides a few useful extra methods.
 type ResponseWrapper struct {
-	Response *http.Response
+	*http.Response
 }
 
 // Must ensures that response code is between 200 and 299.
 // If not, it panics.
 // Returns itself for chaining.
 func (r *ResponseWrapper) Must() *ResponseWrapper {
-	if r.Response.StatusCode < 200 || r.Response.StatusCode > 299 {
+	if r.StatusCode < 200 || r.StatusCode > 299 {
 		panic("unexpected response code")
 	}
 	return r
@@ -60,8 +60,8 @@ func (r *ResponseWrapper) Debug() *ResponseWrapper {
 // If the response type is not supported, it panics.
 func (r *ResponseWrapper) Map() map[string]any {
 	data := map[string]any{}
-	if r.Response.Header.Get("Content-Type") == "application/json" {
-		if err := json.NewDecoder(r.Response.Body).Decode(&data); err != nil {
+	if r.Header.Get("Content-Type") == "application/json" {
+		if err := json.NewDecoder(r.Body).Decode(&data); err != nil {
 			panic(err)
 		}
 	} else {
@@ -73,7 +73,7 @@ func (r *ResponseWrapper) Map() map[string]any {
 // Text reads response body as a text.
 // If something wrong, it panics.
 func (r *ResponseWrapper) Text() string {
-	bts, err := ioutil.ReadAll(r.Response.Body)
+	bts, err := ioutil.ReadAll(r.Body)
 	if err != nil {
 		panic(err)
 	}
@@ -83,8 +83,8 @@ func (r *ResponseWrapper) Text() string {
 // Decode detects response type and decodes it to target.
 // If the response type is not supported, it panics.
 func (r *ResponseWrapper) Decode(target any) {
-	if r.Response.Header.Get("Content-Type") == "application/json" {
-		if err := json.NewDecoder(r.Response.Body).Decode(&target); err != nil {
+	if r.Header.Get("Content-Type") == "application/json" {
+		if err := json.NewDecoder(r.Body).Decode(&target); err != nil {
 			panic(err)
 		}
 	} else {

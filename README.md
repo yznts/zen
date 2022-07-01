@@ -11,7 +11,7 @@ So I decided to combine it all in one place.
 
 ## Documentation
 
-Code is well-documented, so it's pretty comfortable to use documentation provided by [pkg.go.dev](https://pkg.go.dev/github.com/kyoto-framework/zen)
+Code is well-documented, so it's pretty comfortable to use documentation provided by [pkg.go.dev](https://pkg.go.dev/git.sr.ht/~kyoto-framework/zen)
 
 ## Examples
 
@@ -23,7 +23,7 @@ package main
 import (
     "time"
 
-    "github.com/kyoto-framework/zen"
+    "git.sr.ht/~kyoto-framework/zen"
 )
 
 // Example of async function

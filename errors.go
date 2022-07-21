@@ -26,6 +26,6 @@ func Must[T any](val T, err error) T {
 
 // Ignore is a helper that wraps a call to a function returning value and error
 // and ignores if the error is non-nil.
-func Ingore[T any](val T, err error) T {
+func Ignore[T any](val T, err error) T {
 	return val
 }

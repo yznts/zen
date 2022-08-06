@@ -123,6 +123,12 @@ func InRuntime(val any, slice any) bool {
 	}
 }
 
+// Pop takes an last element from a slice (with deletion), or with a given index.
+//
+// Usage:
+//	a := []int{1, 2, 3}
+//	b := Pop(a)     // 3
+//	fmt.println(a)  // []int{1, 2}
 func Pop[T any](slice []T, index ...int) ([]T, T) {
 	// If index is not specified, pop last element
 	if len(index) == 0 {
@@ -140,6 +146,10 @@ func Pop[T any](slice []T, index ...int) ([]T, T) {
 	return tslice, value
 }
 
+// Insert injects a provided value into slice on the given index.
+//
+// Usage:
+//	Insert([]string{"b", "c"}, 0, "a") // []string{"a", "b", "c"}
 func Insert[T any](slice []T, index int, value T) []T {
 	if len(slice) == index {
 		return append(slice, value)
@@ -149,10 +159,18 @@ func Insert[T any](slice []T, index int, value T) []T {
 	return _slice
 }
 
+// Last takes a last element of a given slice.
+//
+// Usage:
+//	Last([]string{"a", "b", "c"}) // "c"
 func Last[T any](slice []T) T {
 	return slice[len(slice)-1]
 }
 
+// Chunks generates a chunks with a given size from a given slice.
+//
+// Usage:
+//	Chunks([]int{1, 2, 3, 4}, 2) // [][]int{ []int{1, 2}, []int{3, 4} }
 func Chunks[T any](slice []T, size int) [][]T {
 	var chunks [][]T
 	for i := 0; i < len(slice); i += size {
@@ -165,6 +183,10 @@ func Chunks[T any](slice []T, size int) [][]T {
 	return chunks
 }
 
+// Any ensures that at least one value from a given slice satisfies a given condition.
+//
+// Usage:
+//	Any([]int{-1, 0, 1}, func(v int) bool { return v < 0 }) // true
 func Any[T any](slice []T, fn func(v T) bool) bool {
 	for _, v := range slice {
 		if fn(v) {
@@ -174,6 +196,10 @@ func Any[T any](slice []T, fn func(v T) bool) bool {
 	return false
 }
 
+// All ensures that all values from a given slice satisfies a given condition.
+//
+// Usage:
+//	All([]int{1, 2, 3}, func(v int) bool { return v > 0 }) // true
 func All[T any](slice []T, fn func(v T) bool) bool {
 	for _, v := range slice {
 		if !fn(v) {
@@ -181,4 +207,21 @@ func All[T any](slice []T, fn func(v T) bool) bool {
 		}
 	}
 	return true
+}
+
+// Cartesian makes a product of two or more sets.
+//
+// Usage:
+//	Cartesian([]int{1, 2}, []int{3, 4}) // [[1 3] [1 4] [2 3] [2 4]]
+func Cartesian[T any](slices ...[]T) (res [][]T) {
+	if len(slices) == 0 {
+		return [][]T{nil}
+	}
+	r := Cartesian(slices[1:]...)
+	for _, e := range slices[0] {
+		for _, p := range r {
+			res = append(res, append([]T{e}, p...))
+		}
+	}
+	return
 }

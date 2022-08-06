@@ -15,7 +15,7 @@ Code is well-documented, so it's pretty comfortable to use documentation provide
 
 ## Examples
 
-These examples don't show all the features of the library. Please refer to the documentation for details.
+Provided examples doesn't cover all the features of the library. Please refer to the documentation for details.
 
 ```go
 package main

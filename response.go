@@ -11,13 +11,18 @@
 	Example:
 
 		func main() {
-			// Make a request
-			resp, err := http.Get("https://example.com/api/json")
-			if err != nil {
-				panic(err)
-			}
-			// Dump, check, convert to map
-			data := zen.Response(resp).Debug().Must().Map()
+			// Data holder
+			data := map[string]any{}
+			// This execution chain will:
+			// - Wrap response and error with zen.ResponseWrapper
+			// - Print raw response dump into stdout
+			// - Ensure status is between 200-299
+			// - Decode data into provided data holder (struct or map)
+			// - Panics, if something went wrong during processing
+			zen.Response(http.Get("https://httpbin.org/get")).
+				Debug().Success().
+				Decode(&data).
+				Must()
 		}
 */
 package zen

@@ -3,7 +3,7 @@
 
 	Response
 
-	Zen provides a *http.Response wrapper with a few useful extra methods.
+	Zen provides a *http.Response wrapper with an ability to chain response processing.
 	It allows to operate with wrapped response in a more convenient way.
 	Check status code, dump response to stdout for debug, convert into map or decode directly into value.
 	Almost everything in single line of code.

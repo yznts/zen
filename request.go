@@ -82,11 +82,11 @@ func (r *RequestBuilder) QueryMap(values map[string]string) *RequestBuilder {
 }
 
 // QueryMapFmt formats and sets query values with a given parameters, stored in map.
-func (r *RequestBuilder) QueryMapFmt(values map[any]any) *RequestBuilder {
+func (r *RequestBuilder) QueryMapFmt(values map[string]any) *RequestBuilder {
 	q := r.url.Query()
 	for k, v := range values {
 		q.Set(
-			fmt.Sprintf("%v", k),
+			k,
 			fmt.Sprintf("%v", v),
 		)
 	}
@@ -105,7 +105,7 @@ func (r *RequestBuilder) QueryValues(values urlpkg.Values) *RequestBuilder {
 // then acts in the same way as QueryMapFmt.
 // If something goes wrong with marshalling, it panics.
 func (r *RequestBuilder) QueryStruct(values any) *RequestBuilder {
-	data := map[any]any{}
+	data := map[string]any{}
 	if err := json.Unmarshal([]byte(JSON(values)), &data); err != nil {
 		panic(err)
 	}
@@ -130,9 +130,9 @@ func (r *RequestBuilder) HeaderMap(headers map[string]string) *RequestBuilder {
 }
 
 // HeaderMapFmt formats and sets header values with a given parameters, stored in map.
-func (r *RequestBuilder) HeaderMapFmt(headers map[any]any) *RequestBuilder {
+func (r *RequestBuilder) HeaderMapFmt(headers map[string]any) *RequestBuilder {
 	for k, v := range headers {
-		r.header[fmt.Sprintf("%v", k)] = []string{fmt.Sprintf("%v", v)}
+		r.header[k] = []string{fmt.Sprintf("%v", v)}
 	}
 	return r
 }

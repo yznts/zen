@@ -1,29 +1,29 @@
 /*
-	-
+-
 
-	Response
+# Response
 
-	Zen provides a *http.Response wrapper with an ability to chain response processing.
-	It allows to operate with wrapped response in a more convenient way.
-	Check status code, dump response to stdout for debug, convert into map or decode directly into value.
-	Almost everything in single line of code.
+Zen provides a *http.Response wrapper with an ability to chain response processing.
+It allows to operate with wrapped response in a more convenient way.
+Check status code, dump response to stdout for debug, convert into map or decode directly into value.
+Almost everything in single line of code.
 
-	Example:
+Example:
 
-		func main() {
-			// Data holder
-			data := map[string]any{}
-			// This execution chain will:
-			// - Wrap response and error with zen.ResponseWrapper
-			// - Print raw response dump into stdout
-			// - Ensure status is between 200-299
-			// - Decode data into provided data holder (struct or map)
-			// - Panics, if something went wrong during processing
-			zen.Response(http.Get("https://httpbin.org/get")).
-				Debug().Success().
-				Decode(&data).
-				Must()
-		}
+	func main() {
+		// Data holder
+		data := map[string]any{}
+		// This execution chain will:
+		// - Wrap response and error with zen.ResponseWrapper
+		// - Print raw response dump into stdout
+		// - Ensure status is between 200-299
+		// - Decode data into provided data holder (struct or map)
+		// - Panics, if something went wrong during processing
+		zen.Response(http.Get("https://httpbin.org/get")).
+			Debug().Success().
+			Decode(&data).
+			Must()
+	}
 */
 package zen
 

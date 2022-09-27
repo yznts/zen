@@ -1,18 +1,18 @@
 /*
-	-
+-
 
-	Cast
+# Cast
 
-	Zen provides a comfortable way to work with slices casting ([]any).
+Zen provides a comfortable way to work with slices casting ([]any).
 
-	Example:
+Example:
 
-		func main() {
-			// Define a sample slice
-			values := []any{1, 2, 3}
-			// Demonstrate casting
-			castedValues := zen.CastSlice[int](values) []int{1, 2, 3}
-		}
+	func main() {
+		// Define a sample slice
+		values := []any{1, 2, 3}
+		// Demonstrate casting
+		castedValues := zen.CastSlice[int](values) []int{1, 2, 3}
+	}
 */
 package zen
 
@@ -20,7 +20,8 @@ package zen
 // to a slice of the given type.
 //
 // Usage:
-//  zen.CastSlice[int]([]any{1, 2, 3}) // []int{1, 2, 3}
+//
+//	zen.CastSlice[int]([]any{1, 2, 3}) // []int{1, 2, 3}
 func CastSlice[T any](slice []any) []T {
 	_slice := make([]T, 0, len(slice))
 	for _, el := range slice {
@@ -33,7 +34,8 @@ func CastSlice[T any](slice []any) []T {
 // to a slice of the given type pointers.
 //
 // Usage:
-//  zen.CastPSlice(int)([]any{1, 2, nil}) []*int{1, 2, nil}
+//
+//	zen.CastPSlice(int)([]any{1, 2, nil}) []*int{1, 2, nil}
 func CastPSlice[T any](slice []any) []*T {
 	_slice := make([]*T, 0, len(slice))
 	for _, v := range slice {

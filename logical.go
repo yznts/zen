@@ -1,18 +1,18 @@
 /*
-	-
+-
 
-	Logical
+# Logical
 
-	Logical expressions from another languages, but missing in Go.
+Logical expressions from another languages, but missing in Go.
 
-	Examples:
+Examples:
 
-		func main() {
-			// Go is not supporting "or" for values, like (0 || 1)
-			zen.Or("", "asd") // string{"asd"}
-			// Go doesn't have "ternary" operator, like (true ? "asd" : "qwe")
-			zen.Tr(false, "asd", "qwe") // string{"qwe"}
-		}
+	func main() {
+		// Go is not supporting "or" for values, like (0 || 1)
+		zen.Or("", "asd") // string{"asd"}
+		// Go doesn't have "ternary" operator, like (true ? "asd" : "qwe")
+		zen.Tr(false, "asd", "qwe") // string{"qwe"}
+	}
 */
 package zen
 
@@ -20,7 +20,8 @@ package zen
 // Unfortuantely, in Go this operator only works for conditions.
 //
 // Usage:
-//  zen.Or(0, 1) // 1
+//
+//	zen.Or(0, 1) // 1
 func Or[T comparable](a, b T) T {
 	var c T
 	if a != c {
@@ -33,7 +34,8 @@ func Or[T comparable](a, b T) T {
 // Unfortuantely, Go doesn't have this operator.
 //
 // Usage:
-//  zen.Tr(false, "asd", "qwe") // string{"qwe"}
+//
+//	zen.Tr(false, "asd", "qwe") // string{"qwe"}
 func Tr[T comparable](condition bool, v1, v2 T) T {
 	if condition {
 		return v1

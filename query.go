@@ -19,13 +19,13 @@ type QueryWrapper struct {
 //
 // Example:
 //
-//		var target struct {
-//			Foo string `query:"foo"`
-//			Bar int `query:"bar"`
-//		}
+//	var target struct {
+//		Foo string `query:"foo"`
+//		Bar int `query:"bar"`
+//	}
 //
-//		q, _ := url.ParseQuery("foo=asdqwe&bar=123")
-//		kyoto.Query(q).Unmarshal(&target)
+//	q, _ := url.ParseQuery("foo=asdqwe&bar=123")
+//	kyoto.Query(q).Unmarshal(&target)
 func (q *QueryWrapper) Unmarshal(target any) error {
 	// Get target reflection value
 	ob := reflect.ValueOf(target)

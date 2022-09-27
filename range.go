@@ -1,47 +1,48 @@
 /*
-	-
+-
 
-	Range
+# Range
 
-	Zen provides some generic functions for basic slice operations.
+Zen provides some generic functions for basic slice operations.
 
-	Examples:
+Examples:
 
-		func main() {
-			// Creating an integers slice with a Range function
-			var slice = zen.Range(1, 5) // []int{1, 2, 3, 4, 5}
+	func main() {
+		// Creating an integers slice with a Range function
+		var slice = zen.Range(1, 5) // []int{1, 2, 3, 4, 5}
 
-			// Filtering
-			zen.Filter(slice, func(v int) bool { return v < 3 }) // []int{1, 2}
+		// Filtering
+		zen.Filter(slice, func(v int) bool { return v < 3 }) // []int{1, 2}
 
-			// Creating a new slice, based on existing one with a Map function
-			zen.Map(slice, func(v int) int { return v * 2 }) // []int{2, 4, 6, 8, 10}
+		// Creating a new slice, based on existing one with a Map function
+		zen.Map(slice, func(v int) int { return v * 2 }) // []int{2, 4, 6, 8, 10}
 
-			// Checking if an element is in the slice
-			zen.In(1, slice) // true
+		// Checking if an element is in the slice
+		zen.In(1, slice) // true
 
-			// Pop an element at the given index from the slice (returns a new slice and the value)
-			zen.Pop(slice, 1) // ([]int{1, 3, 4, 5}, 2)
+		// Pop an element at the given index from the slice (returns a new slice and the value)
+		zen.Pop(slice, 1) // ([]int{1, 3, 4, 5}, 2)
 
-			// Insert an element at the given index in the slice (returns a new slice)
-			zen.Insert(slice, 1, 2) // []int{1, 2, 2, 3, 4, 5}
+		// Insert an element at the given index in the slice (returns a new slice)
+		zen.Insert(slice, 1, 2) // []int{1, 2, 2, 3, 4, 5}
 
-			// Get the last element from the slice
-			zen.Last(slice) // 5
+		// Get the last element from the slice
+		zen.Last(slice) // 5
 
-			// Check if any element in the slice matches the given function
-			zen.Any(slice, func(v int) bool { return v == 2 }) // true
+		// Check if any element in the slice matches the given function
+		zen.Any(slice, func(v int) bool { return v == 2 }) // true
 
-			// Check if all elements in the slice match the given function
-			zen.All(slice, func(v int) bool { return v < 6 }) // true
-		}
+		// Check if all elements in the slice match the given function
+		zen.All(slice, func(v int) bool { return v < 6 }) // true
+	}
 */
 package zen
 
 // Filter returns filtered slice according to the given function.
 //
 // Usage:
-//  Filter([]int{1, 2, 3}, func(v int) bool { return v < 3 }) // []int{1, 2}
+//
+//	Filter([]int{1, 2, 3}, func(v int) bool { return v < 3 }) // []int{1, 2}
 func Filter[T any](slice []T, fn func(v T) bool) []T {
 	var a []T
 	for _, v := range slice {
@@ -55,7 +56,8 @@ func Filter[T any](slice []T, fn func(v T) bool) []T {
 // Map returns a new slice with the results of applying the given function to each element in the given slice.
 //
 // Usage:
-//  Map([]string{"asd", "qwe"}, func(v string) int { return len(v) }) // []int{3, 3}
+//
+//	Map([]string{"asd", "qwe"}, func(v string) int { return len(v) }) // []int{3, 3}
 func Map[T1 any, T2 any](slice []T1, fn func(v T1) T2) []T2 {
 	a := make([]T2, len(slice))
 	for i, v := range slice {
@@ -67,7 +69,8 @@ func Map[T1 any, T2 any](slice []T1, fn func(v T1) T2) []T2 {
 // Range returns a new slice of integers in the given range (from, to).
 //
 // Usage:
-// 	Range(1, 5) // []int{1, 2, 3, 4, 5}
+//
+//	Range(1, 5) // []int{1, 2, 3, 4, 5}
 func Range(from, to int) []int {
 	a := make([]int, to-from+1)
 	for i := 0; i <= to-from; i++ {
@@ -79,7 +82,8 @@ func Range(from, to int) []int {
 // In returns true if the given value is in the given slice.
 //
 // Usage:
-// 	In(1, []int{1, 2, 3}) // true
+//
+//	In(1, []int{1, 2, 3}) // true
 func In[T comparable](val T, slice []T) bool {
 	for _, v := range slice {
 		if v == val {
@@ -126,6 +130,7 @@ func InRuntime(val any, slice any) bool {
 // Pop takes an last element from a slice (with deletion), or with a given index.
 //
 // Usage:
+//
 //	a := []int{1, 2, 3}
 //	b := Pop(a)     // 3
 //	fmt.println(a)  // []int{1, 2}
@@ -149,6 +154,7 @@ func Pop[T any](slice []T, index ...int) ([]T, T) {
 // Insert injects a provided value into slice on the given index.
 //
 // Usage:
+//
 //	Insert([]string{"b", "c"}, 0, "a") // []string{"a", "b", "c"}
 func Insert[T any](slice []T, index int, value T) []T {
 	if len(slice) == index {
@@ -162,6 +168,7 @@ func Insert[T any](slice []T, index int, value T) []T {
 // Last takes a last element of a given slice.
 //
 // Usage:
+//
 //	Last([]string{"a", "b", "c"}) // "c"
 func Last[T any](slice []T) T {
 	return slice[len(slice)-1]
@@ -170,6 +177,7 @@ func Last[T any](slice []T) T {
 // Chunks generates a chunks with a given size from a given slice.
 //
 // Usage:
+//
 //	Chunks([]int{1, 2, 3, 4}, 2) // [][]int{ []int{1, 2}, []int{3, 4} }
 func Chunks[T any](slice []T, size int) [][]T {
 	var chunks [][]T
@@ -186,6 +194,7 @@ func Chunks[T any](slice []T, size int) [][]T {
 // Any ensures that at least one value from a given slice satisfies a given condition.
 //
 // Usage:
+//
 //	Any([]int{-1, 0, 1}, func(v int) bool { return v < 0 }) // true
 func Any[T any](slice []T, fn func(v T) bool) bool {
 	for _, v := range slice {
@@ -199,6 +208,7 @@ func Any[T any](slice []T, fn func(v T) bool) bool {
 // All ensures that all values from a given slice satisfies a given condition.
 //
 // Usage:
+//
 //	All([]int{1, 2, 3}, func(v int) bool { return v > 0 }) // true
 func All[T any](slice []T, fn func(v T) bool) bool {
 	for _, v := range slice {
@@ -212,6 +222,7 @@ func All[T any](slice []T, fn func(v T) bool) bool {
 // Cartesian makes a product of two or more sets.
 //
 // Usage:
+//
 //	Cartesian([]int{1, 2}, []int{3, 4}) // [[1 3] [1 4] [2 3] [2 4]]
 func Cartesian[T any](slices ...[]T) (res [][]T) {
 	if len(slices) == 0 {

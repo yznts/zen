@@ -1,6 +1,7 @@
 package zen
 
 import (
+	"fmt"
 	"html/template"
 	"os"
 	"strings"
@@ -38,6 +39,8 @@ func FuncMap() template.FuncMap {
 		"upper":    strings.ToUpper,
 		"title":    strings.Title,
 		"trim":     strings.TrimSpace,
+		// Formatting
+		"sprintf": fmt.Sprintf,
 		// Numbers formatting
 		"number":    FormatNumber,
 		"numberP0":  FormatNumberP0,

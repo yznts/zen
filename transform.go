@@ -1,32 +1,32 @@
 /*
-	-
+-
 
-	Transform
+# Transform
 
-	Zen provides a number of functions that can be used to transform
-	data into different types and forms.
-	Most of these functions are working with base data types.
+Zen provides a number of functions that can be used to transform
+data into different types and forms.
+Most of these functions are working with base data types.
 
-	Examples:
+Examples:
 
-		func main() {
-			// Common data types transformations
-			numptr := zen.Ptr(1) // *int{1}  Inline pointer
-			boolval := zen.Bool(3) // bool{true}
-			intval := zen.Int("5") // int{5}
-			floatval := zen.Float64("6.5") // float64{6.5}
-			strval := zen.String(7) // string{"7"}
+	func main() {
+		// Common data types transformations
+		numptr := zen.Ptr(1) // *int{1}  Inline pointer
+		boolval := zen.Bool(3) // bool{true}
+		intval := zen.Int("5") // int{5}
+		floatval := zen.Float64("6.5") // float64{6.5}
+		strval := zen.String(7) // string{"7"}
 
-			// Map composition (useful for templates)
-			resmap := zen.Compose("foo", 1, "bar", "2") // map[any]any{"foo": 1, "bar": "2"}
+		// Map composition (useful for templates)
+		resmap := zen.Compose("foo", 1, "bar", "2") // map[any]any{"foo": 1, "bar": "2"}
 
-			// JSON
-			resjson := zen.JSON(resmap) // string{`{"foo": 1, "bar": "2"}`}
+		// JSON
+		resjson := zen.JSON(resmap) // string{`{"foo": 1, "bar": "2"}`}
 
-			// Base64
-			resbase64 := zen.B64Enc(resjson) // string{`eyJmb28iOiAxLCAiYmFyIjogIjIifQ==`}
-			resbase64dec := string(zen.B64Dec(resbase64)) // string{`{"foo": 1, "bar": "2"}`}
-		}
+		// Base64
+		resbase64 := zen.B64Enc(resjson) // string{`eyJmb28iOiAxLCAiYmFyIjogIjIifQ==`}
+		resbase64dec := string(zen.B64Dec(resbase64)) // string{`{"foo": 1, "bar": "2"}`}
+	}
 */
 package zen
 
@@ -34,29 +34,47 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"reflect"
 	"strconv"
 )
 
-// Ptr makes a pointer to the given value.
+// Ptr makes a pointer for a given value.
 //
 // Usage:
-//  zen.Ptr(1) // *int 1
+//
+//	zen.Ptr(1) // *int 1
 func Ptr[T any](val T) *T {
 	return &val
 }
 
-// Int converts the given value to a boolean.
+// Int converts the given value to boolean.
 //
 // Usage:
-//  zen.Bool(4.5) // true
+//
+//	zen.Bool(4.5) // true
 func Bool(val any) bool {
 	switch val := val.(type) {
 	case bool:
 		return val
+	case *bool:
+		if val == nil {
+			return false
+		}
+		return *val
 	case int, int8, int16, int32, int64, uint, uint8, uint16, uint32, uint64, float32, float64:
 		return val != 0
+	case *int, *int8, *int16, *int32, *int64, *uint, *uint8, *uint16, *uint32, *uint64, *float32, *float64:
+		if val == nil {
+			return false
+		}
+		return reflect.ValueOf(val).Int() != 0
 	case string:
 		return val != ""
+	case *string:
+		if val == nil {
+			return false
+		}
+		return reflect.ValueOf(val).String() != ""
 	case nil:
 		return false
 	default:
@@ -64,10 +82,11 @@ func Bool(val any) bool {
 	}
 }
 
-// Int converts the given value to an integeter.
+// Int converts the given value to int.
 //
 // Usage:
-//  zen.Int("123") // 123
+//
+//	zen.Int("123") // 123
 func Int(val any) int {
 	switch val := val.(type) {
 	case bool:
@@ -99,8 +118,79 @@ func Int(val any) int {
 		return int(val)
 	case float64:
 		return int(val)
+	case *int:
+		if val == nil {
+			return 0
+		}
+		return *val
+	case *int8:
+		if val == nil {
+			return 0
+		}
+		return int(*val)
+	case *int16:
+		if val == nil {
+			return 0
+		}
+		return int(*val)
+	case *int32:
+		if val == nil {
+			return 0
+		}
+		return int(*val)
+	case *int64:
+		if val == nil {
+			return 0
+		}
+		return int(*val)
+	case *uint:
+		if val == nil {
+			return 0
+		}
+		return int(*val)
+	case *uint8:
+		if val == nil {
+			return 0
+		}
+		return int(*val)
+	case *uint16:
+		if val == nil {
+			return 0
+		}
+		return int(*val)
+	case *uint32:
+		if val == nil {
+			return 0
+		}
+		return int(*val)
+	case *uint64:
+		if val == nil {
+			return 0
+		}
+		return int(*val)
+
+	case *float32:
+		if val == nil {
+			return 0
+		}
+		return int(*val)
+
+	case *float64:
+		if val == nil {
+			return 0
+		}
+		return int(*val)
 	case string:
 		i, err := strconv.Atoi(val)
+		if err != nil {
+			panic(err)
+		}
+		return i
+	case *string:
+		if val == nil {
+			return 0
+		}
+		i, err := strconv.Atoi(*val)
 		if err != nil {
 			panic(err)
 		}
@@ -112,10 +202,11 @@ func Int(val any) int {
 	}
 }
 
-// Float64 converts the given value to a float64.
+// Float64 converts the given value to float64.
 //
 // Usage:
-//  zen.Float64("5") // 5.0
+//
+//	zen.Float64("5") // 5.0
 func Float64(val any) float64 {
 	switch val := val.(type) {
 	case bool:
@@ -147,8 +238,79 @@ func Float64(val any) float64 {
 		return float64(val)
 	case float64:
 		return float64(val)
+	case *int:
+		if val == nil {
+			return 0
+		}
+		return float64(*val)
+	case *int8:
+		if val == nil {
+			return 0
+		}
+		return float64(*val)
+	case *int16:
+		if val == nil {
+			return 0
+		}
+		return float64(*val)
+	case *int32:
+		if val == nil {
+			return 0
+		}
+		return float64(*val)
+	case *int64:
+		if val == nil {
+			return 0
+		}
+		return float64(*val)
+	case *uint:
+		if val == nil {
+			return 0
+		}
+		return float64(*val)
+	case *uint8:
+		if val == nil {
+			return 0
+		}
+		return float64(*val)
+	case *uint16:
+		if val == nil {
+			return 0
+		}
+		return float64(*val)
+	case *uint32:
+		if val == nil {
+			return 0
+		}
+		return float64(*val)
+	case *uint64:
+		if val == nil {
+			return 0
+		}
+		return float64(*val)
+
+	case *float32:
+		if val == nil {
+			return 0
+		}
+		return float64(*val)
+
+	case *float64:
+		if val == nil {
+			return 0
+		}
+		return float64(*val)
 	case string:
 		i, err := strconv.ParseFloat(val, 64)
+		if err != nil {
+			panic(err)
+		}
+		return float64(i)
+	case *string:
+		if val == nil {
+			return 0
+		}
+		i, err := strconv.ParseFloat(*val, 64)
 		if err != nil {
 			panic(err)
 		}
@@ -163,7 +325,8 @@ func Float64(val any) float64 {
 // String converts the given value to a string.
 //
 // Usage:
-//  zen.String(1) // "1"
+//
+//	zen.String(1) // "1"
 func String(val any) string {
 	switch val := val.(type) {
 	case bool:
@@ -186,10 +349,11 @@ func String(val any) string {
 // Based on even and odd values.
 //
 // Usage:
-//  // Code
-//  zen.Compose("foo", 1, "bar", 2) // map[any]any{"foo": 1, "bar": 2}
-//  // Template
-//  {{ compose "foo" 1 "bar" 2 }}
+//
+//	// Code
+//	zen.Compose("foo", 1, "bar", 2) // map[any]any{"foo": 1, "bar": 2}
+//	// Template
+//	{{ compose "foo" 1 "bar" 2 }}
 func Compose(vals ...any) map[any]any {
 	m := make(map[any]any)
 	for i := 0; i < len(vals); i += 2 {
@@ -202,10 +366,11 @@ func Compose(vals ...any) map[any]any {
 // Useful as a template function.
 //
 // Usage:
-//  // Code
-//  zen.JSON(map[any]any{"foo": 1, "bar": 2}) // {"foo":1,"bar":2}
-//  // Template
-//  {{ json .Value }}
+//
+//	// Code
+//	zen.JSON(map[any]any{"foo": 1, "bar": 2}) // {"foo":1,"bar":2}
+//	// Template
+//	{{ json .Value }}
 func JSON(val any) string {
 	content, err := json.Marshal(val)
 	if err != nil {
@@ -217,10 +382,11 @@ func JSON(val any) string {
 // B64Enc converts the given value (bytes or string) to a base64 string.
 //
 // Usage:
-//  // Code
-//  zen.B64Enc([]byte("foo")) // "Zm9v"
-//  Template
-//  {{ b64enc "foo" }}
+//
+//	// Code
+//	zen.B64Enc([]byte("foo")) // "Zm9v"
+//	Template
+//	{{ b64enc "foo" }}
 func B64Enc(val any) string {
 	switch val := val.(type) {
 	case []byte:
@@ -235,10 +401,11 @@ func B64Enc(val any) string {
 // B64Dec converts the given base64 string to a value (bytes)
 //
 // Usage:
-//  // Code
-//  zen.B64Dec("Zm9v") // []byte("foo")
-//  // Template
-//  {{ b64dec "Zm9v" }}
+//
+//	// Code
+//	zen.B64Dec("Zm9v") // []byte("foo")
+//	// Template
+//	{{ b64dec "Zm9v" }}
 func B64Dec(val string) []byte {
 	data, err := base64.StdEncoding.DecodeString(val)
 	if err != nil {

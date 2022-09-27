@@ -1,11 +1,10 @@
 /*
-	-
+-
 
-	Arithmetic
+# Arithmetic
 
-	Zen provides simple arithmetic functions for sets of values: Sum, Sub, Mul, Div.
-	Main point is to provide runtime template functions (which are missing in the built-in html/template).
-
+Zen provides simple arithmetic functions for sets of values: Sum, Sub, Mul, Div.
+Main point is to provide runtime template functions (which are missing in the built-in html/template).
 */
 package zen
 
@@ -16,10 +15,11 @@ import (
 // Sum returns the sum of the given values.
 //
 // Usage:
-//  // Code
-//  zen.Sum(1, 2, 3, slice...) // 6
-//  // Templates
-//  {{ sum 1 2 3 }} // 6
+//
+//	// Code
+//	zen.Sum(1, 2, 3, slice...) // 6
+//	// Templates
+//	{{ sum 1 2 3 }} // 6
 func Sum[T constraints.Integer | constraints.Float | string](vals ...T) T {
 	if len(vals) < 2 {
 		panic("Sum() requires at least 2 arguments")
@@ -68,10 +68,11 @@ func SumRuntime(vals ...any) any {
 // Sub returns the subtraction of the given values from the first one.
 //
 // Usage:
-//  // Code
-//  zen.Sub(3, 2, 1, slice...) // 0
-//  // Templates
-//  {{ sub 3 2 1 }} // 0
+//
+//	// Code
+//	zen.Sub(3, 2, 1, slice...) // 0
+//	// Templates
+//	{{ sub 3 2 1 }} // 0
 func Sub[T constraints.Integer | constraints.Float](vals ...T) T {
 	if len(vals) < 2 {
 		panic("Sub() requires at least 2 arguments")
@@ -118,10 +119,11 @@ func SubRuntime(vals ...any) any {
 // Mul returns the multiplication of the given values.
 //
 // Usage:
-//  // Code
-//  zen.Mul(1, 2, 3, slice...) // 6
-//  // Templates
-//  {{ mul 1 2 3 }} // 6
+//
+//	// Code
+//	zen.Mul(1, 2, 3, slice...) // 6
+//	// Templates
+//	{{ mul 1 2 3 }} // 6
 func Mul[T constraints.Integer | constraints.Float](vals ...T) T {
 	if len(vals) < 2 {
 		panic("Mul() requires at least 2 arguments")
@@ -168,10 +170,11 @@ func MulRuntime(vals ...any) any {
 // Div returns the division of the given values to the first one.
 //
 // Usage:
-//  // Code
-//  zen.Div(3, 2, 1, slice...) // 1.5
-//  // Templates
-//  {{ sum 3 2 1 }} // 1.5
+//
+//	// Code
+//	zen.Div(3, 2, 1, slice...) // 1.5
+//	// Templates
+//	{{ sum 3 2 1 }} // 1.5
 func Div[T constraints.Integer | constraints.Float](vals ...T) T {
 	if len(vals) < 2 {
 		panic("Div() requires at least 2 arguments")

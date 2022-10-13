@@ -1,10 +1,3 @@
-/*
--
-
-# Aggregative
-
-Zen provides some generic aggregative functions for slices.
-*/
 package zen
 
 import "golang.org/x/exp/constraints"

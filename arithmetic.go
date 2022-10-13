@@ -1,11 +1,3 @@
-/*
--
-
-# Arithmetic
-
-Zen provides simple arithmetic functions for sets of values: Sum, Sub, Mul, Div.
-Main point is to provide runtime template functions (which are missing in the built-in html/template).
-*/
 package zen
 
 import (

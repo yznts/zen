@@ -1,32 +1,3 @@
-/*
--
-
-# Async
-
-Zen provides a way to define and run asynchronous functions.
-It's based on Go's standard goroutines and channels.
-Future object holds value channel and error.
-It's used as an awaitable object.
-As far as Go is not provides an async/await syntax,
-your function must to return a Future, provided by Async function.
-
-Example:
-
-	func Foo() *zen.Future[string] {
-		return zen.Async(func() (string, error) {
-			return "Bar", nil
-		})
-	}
-
-	func main() {
-		// Non-blocking calls
-		fbar1 := Foo()
-		fbar2 := Foo()
-		// Await for results (errors are passed to simplify example)
-		bar1, _ := zen.Await(fbar1)
-		bar2, _ := zen.Await(fbar2)
-	}
-*/
 package zen
 
 import "encoding/json"

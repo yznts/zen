@@ -1,44 +1,3 @@
-/*
--
-
-# Request
-
-Zen provides a RequestBuilder with an ability to chain request definition and execution.
-It allows to set query, headers, body, almost everything in single line of code.
-Almost everything in single line of code.
-Supports both setting values with structs/maps and native values (like url.Values for query).
-As far as RequestBuilder have an option to return *ResponseWrapper,
-you can chain both request building and response processing into single line.
-
-Example:
-
-	func main() {
-
-		// This request building chain will:
-		// - Parse initial values (method and url)
-		// - Set a query value "qval" for a key "qkey"
-		// - Set a header "hkey: hval"
-		// - Set an url encoded body and a header "Content-Type: application/x-www-form-urlencoded"
-		// - Build a resulting request and return
-		request := zen.Request("POST", "https://httpbin.org/post").
-			Query("qkey", "qval").
-			Header("hkey", "hval").
-			Form(map[string]string{"fkey": "fval"}).
-			Build()
-
-		// Request header also have an inline execution option.
-		// This gives an ability to process response inline.
-		data := map[string]any{}
-		err := zen.Request("GET", "https://httpbin.org/get").
-			Do().
-			Success().
-			Decode(&data).
-			Ensure()
-		if err != nil {
-			fmt.Println("Something went wrong: %v", err)
-		}
-	}
-*/
 package zen
 
 import (
@@ -229,7 +188,7 @@ func (r *RequestBuilder) Build() *http.Request {
 }
 
 // Request initializes a *RequestBuilder with a given required parameters.
-// See `RequestBuilder` for details.
+// See RequestBuilder for details.
 func Request(method, url string) *RequestBuilder {
 	return &RequestBuilder{
 		method: method,

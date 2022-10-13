@@ -1,19 +1,3 @@
-/*
--
-
-# Logical
-
-Logical expressions from another languages, but missing in Go.
-
-Examples:
-
-	func main() {
-		// Go is not supporting "or" for values, like (0 || 1)
-		zen.Or("", "asd") // string{"asd"}
-		// Go doesn't have "ternary" operator, like (true ? "asd" : "qwe")
-		zen.Tr(false, "asd", "qwe") // string{"qwe"}
-	}
-*/
 package zen
 
 // Or acts like "||" for values in any other language.

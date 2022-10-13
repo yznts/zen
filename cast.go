@@ -1,19 +1,3 @@
-/*
--
-
-# Cast
-
-Zen provides a comfortable way to work with slices casting ([]any).
-
-Example:
-
-	func main() {
-		// Define a sample slice
-		values := []any{1, 2, 3}
-		// Demonstrate casting
-		castedValues := zen.CastSlice[int](values) []int{1, 2, 3}
-	}
-*/
 package zen
 
 // CastSice is a function to cast a slice of any values ([]any)

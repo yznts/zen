@@ -93,10 +93,11 @@ Funcmap
 Library provides an utilities funcmap to be attached to template rendering.
 See FuncMap variable for details.
 
-Format
+Strings
 
 Zen provides some useful non-standard string formatting functions.
 
+	zen.Replace("Hello, 42 World!", "[0-9]+", "<number>") // Hello, <number> World!
 	zen.FormatNumber(12345.456, 0, "$", "") // "$12,345"
 	zen.FormatNumberP0(12345.456) // "12,345"
 	zen.FormatNumberP1(12345.456) // "12,345.4"
@@ -150,11 +151,13 @@ Some generic functions for basic slice operations.
 	// Check if all elements in the slice match the given function
 	zen.All(slice, func(v int) bool { return v < 6 }) // true
 
-Request
+net/http
 
-Library provides a RequestBuilder with an ability to chain request definition and execution.
+Library provides a set of wrappers and builder in addition to default net/http package.
+
+RequestBuilder is a builder with an ability to chain request definition and execution.
+You can initialize RequestBuilder with zen.Request function.
 It allows to set query, headers, body, almost everything in single line of code.
-Almost everything in single line of code.
 Supports both setting values with structs/maps and native values (like url.Values for query).
 As far as RequestBuilder have an option to return *ResponseWrapper,
 you can chain both request building and response processing into single line.
@@ -183,9 +186,8 @@ you can chain both request building and response processing into single line.
 		fmt.Println("Something went wrong: %v", err)
 	}
 
-Response
-
-Library provides a *http.Response wrapper with an ability to chain response processing.
+ResponseWrapper is a wrapper with an ability to chain response processing.
+You can initialize ResponseWrapper with a zen.Response function.
 It allows to operate with wrapped response in a more convenient way.
 Check status code, dump response to stdout for debug, convert body into map or decode directly into value.
 Almost everything in single line of code.

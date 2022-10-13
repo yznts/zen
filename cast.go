@@ -1,6 +1,6 @@
 package zen
 
-// CastSice is a function to cast a slice of any values ([]any)
+// CastSlice is a function to cast a slice of any values ([]any)
 // to a slice of the given type.
 //
 // Usage:

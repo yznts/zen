@@ -2,11 +2,18 @@ package zen
 
 import (
 	"fmt"
+	"regexp"
 	"strconv"
 
 	"golang.org/x/text/language"
 	"golang.org/x/text/message"
 )
+
+// Replace is a replace function similar to strings.ReplaceAll, but with regex support.
+func Replace(s string, old string, new string) string {
+	r := regexp.MustCompile(old)
+	return string(r.ReplaceAll([]byte(s), []byte(new)))
+}
 
 // FormatNumber returns a string representation of the given number in specified format.
 //

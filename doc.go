@@ -151,7 +151,7 @@ Some generic functions for basic slice operations.
 	// Check if all elements in the slice match the given function
 	zen.All(slice, func(v int) bool { return v < 6 }) // true
 
-net/http
+Networking
 
 Library provides a set of wrappers and builder in addition to default net/http package.
 

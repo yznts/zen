@@ -168,6 +168,19 @@ func Last[T any](slice []T) T {
 	return slice[len(slice)-1]
 }
 
+// Limit makes a slice subset of length is bigger than limit.
+//
+// Usage:
+//
+//	Limit([]string{"a", "b", "c"}, 2) // []string{"a", "b"}
+func Limit[T any](slice []T, limit int) []T {
+	if len(slice) > limit {
+		return slice[:limit]
+	} else {
+		return slice
+	}
+}
+
 // Chunks generates a chunks with a given size from a given slice.
 //
 // Usage:

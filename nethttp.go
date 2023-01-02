@@ -294,7 +294,7 @@ func (r *ResponseWrapper) Decode(target any) *ResponseWrapper {
 		return r
 	}
 	// Process response
-	if r.Header.Get("Content-Type") == "application/json" { // JSON
+	if strings.HasPrefix(r.Header.Get("Content-Type"), "application/json") { // JSON
 		// If we got an error, prevent further chain execution
 		if err := json.NewDecoder(r.Body).Decode(&target); err != nil {
 			r.err = err

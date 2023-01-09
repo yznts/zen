@@ -218,11 +218,16 @@ func (r *ResponseWrapper) Must() {
 	}
 }
 
-// Ensure is a chain closer.
+// Error is a chain closer.
 // Ensures that there was no errors in processing chain.
-// If not, returns an error.
-func (r *ResponseWrapper) Ensure() error {
+// If not, error is not nil.
+func (r *ResponseWrapper) Error() error {
 	return r.err
+}
+
+// Ensure is an alias for .Error()
+func (r *ResponseWrapper) Ensure() error {
+	return r.Error()
 }
 
 // Debug prints the response to stdout.
@@ -233,6 +238,8 @@ func (r *ResponseWrapper) Debug() *ResponseWrapper {
 	if r.err != nil {
 		return r
 	}
+	// Dump url
+	println(r.Request.URL.String())
 	// Dump raw response
 	dump, err := httputil.DumpResponse(r.Response, true)
 	// If we got an error, prevent further chain execution

@@ -1,8 +1,0 @@
-version: 3
-
-tasks:
-    doc:
-        cmds:
-            - (sleep 1 && open http://localhost:8000/pkg/git.sr.ht/~kyoto-framework/zen/) &
-            - godoc -http=:8000
-            

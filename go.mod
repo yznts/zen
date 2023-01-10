@@ -1,4 +1,4 @@
-module github.com/kyoto-framework/zen
+module github.com/kyoto-framework/zen/v2
 
 go 1.18
 

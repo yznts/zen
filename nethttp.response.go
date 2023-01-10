@@ -38,6 +38,14 @@ func (r *ResponseWrapper) Ensure() error {
 	return r.Error()
 }
 
+// Clear removes an error from response.
+// Needed for cases when we are acknowledged about
+// it, processed it, and want to proceed with response results.
+func (r *ResponseWrapper) Clear() *ResponseWrapper {
+	r.err = nil
+	return r
+}
+
 // Debug prints the response to stdout.
 // If something goes wrong during dump, chain execution will be stopped.
 // Returns wrapper for chaining.

@@ -27,7 +27,7 @@ import (
 )
 
 // Example of async function
-func foo() zen.Future[string] {
+func foo() *zen.Future[string] {
     return zen.Async(func() (string, error) {
         // Imitate work
         time.Sleep(time.Second)

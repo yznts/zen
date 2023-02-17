@@ -1,0 +1,25 @@
+run:
+  skip-dirs:
+    - kyoto-old
+    - resolib
+
+linters:
+  enable-all: true
+  disable:
+    - exhaustivestruct
+    - exhaustruct
+    - forcetypeassert
+    - nonamedreturns
+    - tagliatelle
+    - varnamelen
+    - wrapcheck
+    - gocognit
+    - gocyclo
+    - cyclop
+    - nakedret
+    - nlreturn
+    - ireturn
+    - funlen
+    - gomnd
+    - noctx
+    - wsl

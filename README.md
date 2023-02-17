@@ -1,8 +1,7 @@
 
 # Zen
 
-Zen is an utility-first package that provides a set of commonly used functions, helpers and extensions.
-Most of the functions are adapted to be used with `html/template`.
+Zen is a set of small utility packages with commonly used functions, helpers and extensions.
 
 ## Motivation
 
@@ -11,7 +10,7 @@ So I decided to combine it all in one place.
 
 ## Documentation
 
-Code is well-documented, so it's pretty comfortable to use documentation provided by [pkg.go.dev](https://pkg.go.dev/github.com/kyoto-framework/zen/v2)
+Code is well-documented, so it's pretty comfortable to use documentation provided by [pkg.go.dev](https://pkg.go.dev/github.com/kyoto-framework/zen/v3)
 
 ## Examples
 
@@ -23,7 +22,7 @@ package main
 import (
     "time"
 
-    "github.com/kyoto-framework/zen/v2"
+    "github.com/kyoto-framework/zen/v3"
 )
 
 // Example of async function

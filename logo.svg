@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="250" height="250">
+	<defs>
+		<filter id="f">
+			<feGaussianBlur stdDeviation="3.5"/>
+		</filter>
+	</defs>
+	<path d="m125,11.8 a56.6,56.6 0 0 1 0,113.2 56.6,56.6 0 0 0 0,113.2 113.2,113.2 0 0 0 0,-226.4" fill="#c92a3b"/>
+	<circle cx="125" cy="68.4" r="17.6" fill="#c92a3b"/>
+	<circle cx="125" cy="181.6" r="17.6" fill="#fff"/>
+</svg>

@@ -1,6 +1,6 @@
 
 <p align="center">
-    <img width="200" src="https://kyoto.codes/images/icons/yin-yang.svg" />
+    <img width="200" src="logo.svg" />
 </p>
 
 <h1 align="center">zen</h1>

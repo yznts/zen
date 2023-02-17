@@ -4,7 +4,7 @@ import "strconv"
 
 /*
 Int converts the given value to int.
-Should be used in a known environment, when values are expected to be only parsable integers.
+Should be used in a known environment, when values are expected to be correct.
 Panics in case of failure.
 
 Usage:

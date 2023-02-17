@@ -64,8 +64,9 @@ var FuncMapAsync = template.FuncMap{
 }
 
 var FuncMapB64 = template.FuncMap{
-	"marshal":   b64.Marshal,
-	"unmarshal": b64.Unmarshal,
+	"base64":      b64.Base64[string],
+	"base64bytes": b64.Base64[[]byte],
+	"string":      b64.String,
 }
 
 var FuncMapConv = template.FuncMap{

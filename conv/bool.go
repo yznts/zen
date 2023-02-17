@@ -4,7 +4,7 @@ import "reflect"
 
 /*
 Bool converts the given value to boolean.
-Should be used in a known environment, when values are expected to be only parsable booleans.
+Should be used in a known environment, when values are expected to be correct.
 Panics in case of failure.
 
 Usage:

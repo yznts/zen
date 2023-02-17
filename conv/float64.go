@@ -4,7 +4,7 @@ import "strconv"
 
 /*
 Float64 converts the given value to float64.
-Should be used in a known environment, when values are expected to be only parsable floats.
+Should be used in a known environment, when values are expected to be correct.
 Panics in case of failure.
 
 Usage:

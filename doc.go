@@ -1,6 +1,6 @@
 //nolint:dupword
 /*
-Zen is a set of small utilities you probably miss.
+Zen is a set of small utilities that you probably miss.
 It's a common situation when simple things drive you crazy
 like missing ternary operator,
 atomic operations that take at least 3 lines,

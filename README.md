@@ -36,6 +36,13 @@ newdata := slice.Filter(data, func(v int) {
 })
 ```
 
+Need to convert a slice of values to something different? Not a big deal. Just give a processing function to "slice.Map".
+
+```go
+data := []int{654, 234, 546, 23, 76, 87, 34, 232, 656, 767, 23, 4, 546, 56}
+datastr := slice.Map(data, strconv.Itoa) // You'll get []string{...}
+```
+
 Let's look at another example. Sometimes you run into situations where the structure takes a pointer to a simple type, like string. It's understandable, sometimes we need to take nil as one of the possible states. But if we will try to create a pointer from an inline value, we get an error.
 
 ```go

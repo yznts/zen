@@ -39,17 +39,17 @@ Usage:
 	// Let's assume we have a future object in "ftr" variable.
 	res, err := ftr.Await()
 */
-func (c *Future[T]) Await() (T, error) {
+func (f *Future[T]) Await() (T, error) {
 	// Return from cache, if exists
-	if c.cache != nil {
-		return *c.cache, c.err
+	if f.cache != nil {
+		return *f.cache, f.err
 	}
 	// Wait for value
-	v := <-c.value
+	v := <-f.value
 	// Save to cache
-	c.cache = &v
+	f.cache = &v
 	// Return
-	return v, c.err
+	return v, f.err
 }
 
 /*
@@ -61,8 +61,8 @@ Usage:
 	// Result will be stored as "any" type, so you'll need to cast it.
 	res, err := ftr.AwaitRuntime()
 */
-func (c *Future[T]) AwaitRuntime() (any, error) {
-	return c.Await()
+func (f *Future[T]) AwaitRuntime() (any, error) {
+	return f.Await()
 }
 
 /*
@@ -76,15 +76,15 @@ Usage:
 		println(v)
 	})
 */
-func (c *Future[T]) Then(f func(T)) *Future[T] {
+func (f *Future[T]) Then(fn func(T)) *Future[T] {
 	// Await first
-	c.Await() //nolint:errcheck
+	f.Await() //nolint:errcheck
 	// If no error, call provided function
-	if c.err == nil {
-		f(*c.cache)
+	if f.err == nil {
+		fn(*f.cache)
 	}
 	// Self-return
-	return c
+	return f
 }
 
 /*
@@ -98,15 +98,15 @@ Usage:
 		println(err.Error())
 	})
 */
-func (c *Future[T]) Catch(f func(error)) *Future[T] {
+func (f *Future[T]) Catch(fn func(error)) *Future[T] {
 	// Await first
-	c.Await() //nolint:errcheck
+	f.Await() //nolint:errcheck
 	// If error, call provided function
-	if c.err != nil {
-		f(c.err)
+	if f.err != nil {
+		fn(f.err)
 	}
 	// Self-return
-	return c
+	return f
 }
 
 /*
@@ -123,6 +123,6 @@ func (f *Future[T]) MarshalJSON() ([]byte, error) {
 /*
 UnmarshalJSON implements future unmarshalling.
 */
-func (c *Future[T]) UnmarshalJSON(data []byte) error {
-	return json.Unmarshal(data, &c.cache)
+func (f *Future[T]) UnmarshalJSON(data []byte) error {
+	return json.Unmarshal(data, &f.cache)
 }

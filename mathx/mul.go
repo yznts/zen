@@ -17,7 +17,7 @@ func Mul[T constraints.Integer | constraints.Float](vals ...T) T {
 	if len(vals) < 2 {
 		panic("Mul() requires at least 2 arguments")
 	}
-	var mul T = vals[0]
+	mul := vals[0]
 	for _, val := range vals[1:] {
 		mul *= val
 	}

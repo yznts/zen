@@ -17,7 +17,7 @@ func Sub[T constraints.Integer | constraints.Float](vals ...T) T {
 	if len(vals) < 2 {
 		panic("Sub() requires at least 2 arguments")
 	}
-	var sub T = vals[0]
+	sub := vals[0]
 	for _, val := range vals[1:] {
 		sub -= val
 	}

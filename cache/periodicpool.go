@@ -6,9 +6,7 @@ import (
 	"time"
 )
 
-var (
-	ErrPeriodicPoolMissingKey = errors.New("referenced key is missing")
-)
+var ErrPeriodicPoolMissingKey = errors.New("referenced key is missing")
 
 type PeriodicPool[T any] struct {
 	Pool    map[string]PeriodicFunc[T]

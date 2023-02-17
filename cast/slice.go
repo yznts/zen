@@ -10,9 +10,9 @@ Usage:
 	cast.Slice[int](values) // []int{1, 2, 3}
 */
 func Slice[T any](slice []any) []T {
-	_slice := make([]T, 0, len(slice))
+	newslice := make([]T, 0, len(slice))
 	for _, el := range slice {
-		_slice = append(_slice, el.(T))
+		newslice = append(newslice, el.(T))
 	}
-	return _slice
+	return newslice
 }

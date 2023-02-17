@@ -16,7 +16,7 @@ func Base64Runtime(value any) string {
 	case string:
 		return base64.StdEncoding.EncodeToString([]byte(value))
 	case []byte:
-		return base64.StdEncoding.EncodeToString([]byte(value))
+		return base64.StdEncoding.EncodeToString(value)
 	default:
 		panic("unknown type for Base64()")
 	}

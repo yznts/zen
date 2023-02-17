@@ -18,7 +18,7 @@ func Div[T constraints.Integer | constraints.Float](vals ...T) T {
 	if len(vals) < 2 {
 		panic("Div() requires at least 2 arguments")
 	}
-	var div T = vals[0]
+	div := vals[0]
 	for _, val := range vals[1:] {
 		div /= val
 	}

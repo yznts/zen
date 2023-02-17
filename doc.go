@@ -51,6 +51,20 @@ Now you can sleep peacefully.
 		Value: conv.Ptr("predefined"), // works!
 	}
 
+Let's move on to the next example, which is very similar.
+They all look alike, don't they?
+Now, we will try to implement "default value".
+Of course, without any additional methods or wrappers it would look something like this.
+
+	value := source1 // Let's assume it's a string
+	if value == "" {
+		value = source2
+	}
+
+Our "logic" mini-package just makes our lives a little easier.
+
+	value := logic.Or(source1, source2)
+
 Need some kind of async/await instead of managing mutexes by hand?
 Yep, sure.
 

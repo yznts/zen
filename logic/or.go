@@ -1,4 +1,4 @@
-package operator
+package logic
 
 /*
 Or acts like "||" for values in any other language.

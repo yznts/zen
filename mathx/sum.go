@@ -1,4 +1,4 @@
-package arithmetic
+package mathx
 
 import (
 	"github.com/kyoto-framework/zen/v3/cast"

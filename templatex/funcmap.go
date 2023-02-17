@@ -8,13 +8,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/kyoto-framework/zen/v3/arithmetic"
 	"github.com/kyoto-framework/zen/v3/async"
 	"github.com/kyoto-framework/zen/v3/b64"
 	"github.com/kyoto-framework/zen/v3/conv"
 	"github.com/kyoto-framework/zen/v3/errorsx"
 	"github.com/kyoto-framework/zen/v3/fmtx"
 	"github.com/kyoto-framework/zen/v3/jsonx"
+	"github.com/kyoto-framework/zen/v3/mathx"
 	"github.com/kyoto-framework/zen/v3/regexpx"
 	"github.com/kyoto-framework/zen/v3/slice"
 )
@@ -37,26 +37,26 @@ func NestFuncMap(funcmap template.FuncMap) func() template.FuncMap {
 
 // FuncMap is a map of utilities functions to be used in templates.
 var FuncMap = template.FuncMap{
-	"arithmetic": NestFuncMap(FuncMapArithmetic),
-	"async":      NestFuncMap(FuncMapAsync),
-	"b64":        NestFuncMap(FuncMapB64),
-	"conv":       NestFuncMap(FuncMapConv),
-	"errorsx":    NestFuncMap(FuncMapErrorsx),
-	"fmtx":       NestFuncMap(FuncMapFmtx),
-	"jsonx":      NestFuncMap(FuncMapJsonx),
-	"regexpx":    NestFuncMap(FuncMapRegexpx),
-	"slice":      NestFuncMap(FuncMapSlice),
+	"mathx":   NestFuncMap(FuncMapmathx),
+	"async":   NestFuncMap(FuncMapAsync),
+	"b64":     NestFuncMap(FuncMapB64),
+	"conv":    NestFuncMap(FuncMapConv),
+	"errorsx": NestFuncMap(FuncMapErrorsx),
+	"fmtx":    NestFuncMap(FuncMapFmtx),
+	"jsonx":   NestFuncMap(FuncMapJsonx),
+	"regexpx": NestFuncMap(FuncMapRegexpx),
+	"slice":   NestFuncMap(FuncMapSlice),
 
 	"time":    NestFuncMap(FuncMapTime),
 	"env":     NestFuncMap(FuncMapEnv),
 	"strings": NestFuncMap(FuncMapStrings),
 }
 
-var FuncMapArithmetic = template.FuncMap{
-	"div": arithmetic.DivRuntime,
-	"mul": arithmetic.MulRuntime,
-	"sub": arithmetic.SubRuntime,
-	"sum": arithmetic.SumRuntime,
+var FuncMapmathx = template.FuncMap{
+	"div": mathx.DivRuntime,
+	"mul": mathx.MulRuntime,
+	"sub": mathx.SubRuntime,
+	"sum": mathx.SumRuntime,
 }
 
 var FuncMapAsync = template.FuncMap{

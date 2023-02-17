@@ -1,4 +1,4 @@
-package operator
+package logic
 
 /*
 Tr acts like a ternary operator in other languages.

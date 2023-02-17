@@ -1,7 +1,7 @@
 package agg
 
 import (
-	"github.com/kyoto-framework/zen/v3/arithmetic"
+	"github.com/kyoto-framework/zen/v3/mathx"
 	"golang.org/x/exp/constraints"
 )
 
@@ -17,6 +17,6 @@ func Avg[T constraints.Integer | constraints.Float](vals ...T) T {
 	if len(vals) == 0 {
 		panic("Avg() called with no arguments")
 	}
-	sum := arithmetic.Sum(vals...)
+	sum := mathx.Sum(vals...)
 	return sum / T(len(vals))
 }

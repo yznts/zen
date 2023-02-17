@@ -59,6 +59,21 @@ SomeStruct{
 }
 ```
 
+Let's move on to the next example, which is very similar. They all look alike, don't they? Now, we will try to implement "default value". Of course, without any additional methods or wrappers it would look something like this.
+
+```go
+value := source1 // Let's assume it's a string
+if value == "" {
+        value = source2
+}
+```
+
+Let's make our lives a little easier with the "logic" mini\-package.
+
+```go
+value := logic.Or(source1, source2)
+```
+
 Need some kind of async/await instead of managing mutexes by hand? Yep, sure.
 
 ```go

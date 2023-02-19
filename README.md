@@ -1,78 +1,105 @@
 
-# Zen
+<p align="center">
+    <img width="200" src="logo.svg" />
+</p>
 
-Zen is an utility-first package that provides a set of commonly used functions, helpers and extensions.
-Most of the functions are adapted to be used with `html/template`.
+<h1 align="center">zen</h1>
 
-## Motivation
-
-We had too many cases of copy-pasting the same code between projects over and over again.
-So I decided to combine it all in one place.
-
-## Documentation
-
-Code is well-documented, so it's pretty comfortable to use documentation provided by [pkg.go.dev](https://pkg.go.dev/github.com/kyoto-framework/zen/v2)
-
-## Examples
-
-Provided examples doesn't cover all the features of the library. Please refer to the documentation for details.
+<p align="center">
+    A set of small utilities that you probably miss
+</p>
 
 ```go
-package main
+import "github.com/kyoto-framework/zen/v3"
+```
 
-import (
-    "time"
+It's a common situation when simple things drive you crazy like missing ternary operator, atomic operations that take at least 3 lines, dealing with complex loops due to missing map/filter, or having to deal with goroutines and synchronization even for simple things.
 
-    "github.com/kyoto-framework/zen/v2"
-)
+Zen tries to solve it. Not solves, but definitely tries. It provides you with a number of small packages to make your work with Go easier. Let's look at a fairly common situation where you need to filter a slice.
 
-// Example of async function
-func foo() *zen.Future[string] {
-    return zen.Async(func() (string, error) {
-        // Imitate work
-        time.Sleep(time.Second)
-        // Return result
-        return "bar", nil
-    })
-}
-
-func main() {
-    // Sample slice with zen.Range
-    slice := zen.Range(1, 5) // []int{1, 2, 3, 4, 5}
-
-    // Aggregatives
-    zen.Min(slice) // 1
-    zen.Max(slice) // 5
-    zen.Avg(slice) // 3
-
-    // Range operations
-    zen.Filter(slice, func(v int) bool { return v < 3 }) // []int{1, 2}
-    zen.Map(slice, func(v int) int { return v * 2 }) // []int{2, 4, 6, 8, 10}
-    zen.In(1, slice) // true
-    zen.Pop(slice, 1) // ([]int{1, 3, 4, 5}, 2)
-    zen.Insert(slice, 1, 2) // []int{1, 2, 2, 3, 4, 5}
-    zen.Last(slice) // 5
-    zen.Any(slice, func(v int) bool { return v == 2 }) // true
-    zen.All(slice, func(v int) bool { return v < 6 }) // true
-
-    // Inline transformations
-    zen.Ptr(1) // *int{1}  Inline pointer
-    zen.Bool(3) // bool{true}
-    zen.Int("5") // int{5}
-    zen.Float64("6.5") // float64{6.5}
-    zen.String(7) // string{"7"}
-
-    // Map composition (useful for templates)
-    zen.Compose("foo", 1, "bar", "2") // map[any]any{"foo": 1, "bar": "2"}
-
-    // Must for opinionated panic handling
-    zen.Must(strconv.Atoi("1")) // int{1}, without error
-
-    // Await example
-    futureFoo := foo() // It's not blocking
-    println("foo call is not blocked")
-    // Wait for result
-    result, _ := zen.Await(futureFoo)
-    println(result)
+```go
+data := []int{654, 234, 546, 23, 76, 87, 34, 232, 656, 767, 23, 4, 546, 56}
+newdata := []int{}
+for _, v := range data {
+        if v > 50 {
+                newdata = append(newdata, v)
+        }
 }
 ```
+
+It's really annoying, isn't it? The language has no built\-in capabilities for doing such operations inline. Let's see what it would look like with our package.
+
+```go
+data := []int{654, 234, 546, 23, 76, 87, 34, 232, 656, 767, 23, 4, 546, 56}
+newdata := slice.Filter(data, func(v int) {
+        return v > 50
+})
+```
+
+Need to convert a slice of values to something different? Not a big deal. Just give a processing function to "slice.Map".
+
+```go
+data := []int{654, 234, 546, 23, 76, 87, 34, 232, 656, 767, 23, 4, 546, 56}
+datastr := slice.Map(data, strconv.Itoa) // You'll get []string{...}
+```
+
+Let's look at another example. Sometimes you run into situations where the structure takes a pointer to a simple type, like string. It's understandable, sometimes we need to take nil as one of the possible states. But if we will try to create a pointer from an inline value, we get an error.
+
+```go
+SomeStruct{
+        Value: &"predefined", // invalid operation: cannot take address of "predefined" (untyped string constant)
+}
+```
+
+So you'll end up defining one more variable before creating the struct. Now you can sleep peacefully.
+
+```go
+SomeStruct{
+        Value: conv.Ptr("predefined"), // works!
+}
+```
+
+Let's move on to the next example, which is very similar. They all look alike, don't they? Now, we will try to implement "default value". Of course, without any additional methods or wrappers it would look something like this.
+
+```go
+value := source1 // Let's assume it's a string
+if value == "" {
+        value = source2
+}
+```
+
+Let's make our lives a little easier with the "logic" mini\-package.
+
+```go
+value := logic.Or(source1, source2)
+```
+
+Need some kind of async/await instead of managing mutexes by hand? Yep, sure.
+
+```go
+// Let's fetch uuid from httbin for this workload example.
+// Please note, example is highly simplified and not includes error checking.
+func httpbinuuid() *async.Future[string] {
+        data := jsonx.Map(
+                httpx.Request("GET", "https://httpbin.org/uuid").
+                        Do().Text(),
+        )
+        return data["uuid"].(string), nil
+}
+
+// Spawn 3 futures
+futures := []*async.Future[string]{
+        httpbinuuid(),
+        httpbinuuid(),
+        httpbinuuid(),
+}
+
+// Print execution results
+for _, future := range futures {
+        log.Println(future.Await()) // <uuid>, nil
+}
+```
+
+In addition to the above, the library contains many interesting things that go beyond a basic overview. First, check the library index to explore the proposed sub\-packages. Each one has its own mini\-documentation, its own index, and consists of well\-documented types and functions.
+
+Zen has been trying to be modular since v3, so it now consists of sub\-packages and does not provide anything from the root package, except the package overview.

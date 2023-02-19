@@ -13,5 +13,6 @@ func Any[T any](slice []T, fn func(v T) bool) bool {
 			return true
 		}
 	}
+
 	return false
 }

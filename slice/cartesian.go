@@ -11,11 +11,13 @@ func Cartesian[T any](slices ...[]T) (res [][]T) {
 	if len(slices) == 0 {
 		return [][]T{nil}
 	}
+
 	r := Cartesian(slices[1:]...)
 	for _, e := range slices[0] {
 		for _, p := range r {
 			res = append(res, append([]T{e}, p...))
 		}
 	}
+
 	return
 }

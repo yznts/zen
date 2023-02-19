@@ -18,5 +18,6 @@ Usage:
 func Map(jsonstring string) map[string]any {
 	data := map[string]any{}
 	errorsx.Must(0, json.Unmarshal([]byte(jsonstring), &data))
+
 	return data
 }

@@ -8,9 +8,7 @@ import (
 	"strings"
 )
 
-var (
-	ErrUnmarshalTarget = errors.New("failed to encode form values to struct, non struct type is given")
-)
+var ErrUnmarshalTarget = errors.New("failed to encode form values to struct, non struct type is given")
 
 /*
 QueryWrapper type is a wrapper for url.Values.
@@ -20,6 +18,7 @@ type QueryWrapper struct {
 	url.Values
 }
 
+//nolint:all
 /*
 Unmarshal helps to parse url.Values into a struct.
 Slightly modified version of github.com/knadh/querytostruct
@@ -96,6 +95,7 @@ func (q QueryWrapper) Unmarshal(target any) error {
 	return nil
 }
 
+//nolint:all
 func querySetVal(f reflect.Value, val string) bool {
 	switch f.Kind() {
 	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:

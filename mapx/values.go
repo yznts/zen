@@ -12,5 +12,6 @@ func Values[T1 comparable, T2 any](m map[T1]T2) (values []T2) {
 	for _, v := range m {
 		values = append(values, v)
 	}
+
 	return
 }

@@ -13,5 +13,6 @@ func Tr[T comparable](condition bool, v1, v2 T) T {
 	if condition {
 		return v1
 	}
+
 	return v2
 }

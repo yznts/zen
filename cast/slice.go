@@ -11,8 +11,10 @@ Usage:
 */
 func Slice[T any](slice []any) []T {
 	newslice := make([]T, 0, len(slice))
+
 	for _, el := range slice {
-		newslice = append(newslice, el.(T))
+		newslice = append(newslice, el.(T)) //nolint:forcetypeassert // We expect a panic, if something is wrong
 	}
+
 	return newslice
 }

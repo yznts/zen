@@ -11,10 +11,12 @@ Usage:
 */
 func Merge[T1 comparable, T2 any](maps ...map[T1]T2) map[T1]T2 {
 	newmap := map[T1]T2{}
+
 	for _, m := range maps {
 		for k, v := range m {
 			newmap[k] = v
 		}
 	}
+
 	return newmap
 }

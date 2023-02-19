@@ -1,3 +1,4 @@
+//nolint:dupl
 package mathx
 
 import (
@@ -5,6 +6,7 @@ import (
 	"golang.org/x/exp/constraints"
 )
 
+//nolint:gomnd
 /*
 Div returns the division of the first value to the second and later.
 Makes no sense in unual use-cases, but useful in templates.
@@ -18,13 +20,16 @@ func Div[T constraints.Integer | constraints.Float](vals ...T) T {
 	if len(vals) < 2 {
 		panic("Div() requires at least 2 arguments")
 	}
+
 	div := vals[0]
 	for _, val := range vals[1:] {
 		div /= val
 	}
+
 	return div
 }
 
+//nolint:cyclop
 /*
 DivRuntime is a runtime version of arithmetic.Div.
 */

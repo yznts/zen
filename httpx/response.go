@@ -48,6 +48,7 @@ it, processed it, and want to proceed with response results.
 */
 func (r *ResponseWrapper) Clear() *ResponseWrapper {
 	r.err = nil
+
 	return r
 }
 
@@ -67,7 +68,9 @@ func (r *ResponseWrapper) Debug() *ResponseWrapper {
 	dump, err := httputil.DumpResponse(r.Response, true)
 	// If we got an error, prevent further chain execution
 	if err != nil {
+		// Set error
 		r.err = err
+		// Return wrapper
 		return r
 	}
 	// Print raw response
@@ -117,16 +120,21 @@ func (r *ResponseWrapper) Unmarshal(target any) *ResponseWrapper {
 	switch strings.Split(r.Header.Get("Content-Type"), ";")[0] {
 	case "application/json":
 		if err := json.NewDecoder(r.Body).Decode(&target); err != nil {
+			// Set error
 			r.err = err
+			// Return wrapper
 			return r
 		}
 	case "text/plain":
 		data, err := io.ReadAll(r.Body)
 		if err != nil {
+			// Set error
 			r.err = err
+			// Return wrapper
 			return r
 		}
-		*target.(*string) = string(data)
+		// Write data
+		*target.(*string) = string(data) //nolint:forcetypeassert
 	default:
 		panic("content type is not supported")
 	}
@@ -143,5 +151,6 @@ func Response(resp *http.Response, err ...error) *ResponseWrapper {
 	if len(err) == 0 {
 		err = append(err, nil)
 	}
+
 	return &ResponseWrapper{resp, err[0]}
 }

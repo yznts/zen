@@ -14,5 +14,6 @@ func Or[T comparable](a, b T) T {
 	if a != c {
 		return a
 	}
+
 	return b
 }

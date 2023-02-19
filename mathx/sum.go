@@ -5,6 +5,7 @@ import (
 	"golang.org/x/exp/constraints"
 )
 
+//nolint:gomnd
 /*
 Sum returns the sum of the given values.
 
@@ -17,13 +18,16 @@ func Sum[T constraints.Integer | constraints.Float | string](vals ...T) T {
 	if len(vals) < 2 {
 		panic("Sum() requires at least 2 arguments")
 	}
+
 	var sum T
 	for _, val := range vals {
 		sum += val
 	}
+
 	return sum
 }
 
+//nolint:cyclop
 /*
 SumRuntime is a runtime version of arithmetic.Sum.
 */

@@ -13,11 +13,13 @@ Usage:
 	})
 */
 func Map[T1 any, T2 any](slice []T1, fn func(v T1) T2) []T2 {
-	a := make([]T2, len(slice))
+	newslice := make([]T2, len(slice))
+
 	for i, v := range slice {
 		go func(i int, v T1) {
-			a[i] = fn(v)
+			newslice[i] = fn(v)
 		}(i, v)
 	}
-	return a
+
+	return newslice
 }

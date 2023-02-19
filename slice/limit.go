@@ -11,5 +11,6 @@ func Limit[T any](slice []T, limit int) []T {
 	if len(slice) > limit {
 		return slice[:limit]
 	}
+
 	return slice
 }

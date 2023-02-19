@@ -19,9 +19,12 @@ func (p *PeriodicPool[T]) New(key string, interval time.Duration, fn PeriodicFun
 
 func (p *PeriodicPool[T]) Get(key string) (T, error) {
 	if p.Pool[key] == nil {
+		// Initialize empty value
 		var v T
+		// Return empty value and error
 		return v, ErrPeriodicPoolMissingKey
 	}
+	// Return periodic result
 	return p.Pool[key]()
 }
 

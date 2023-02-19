@@ -1,3 +1,4 @@
+//nolint:dupl
 package mathx
 
 import (
@@ -5,6 +6,7 @@ import (
 	"golang.org/x/exp/constraints"
 )
 
+//nolint:gomnd
 /*
 Sub returns the subtraction of the given values from the first one.
 
@@ -17,13 +19,16 @@ func Sub[T constraints.Integer | constraints.Float](vals ...T) T {
 	if len(vals) < 2 {
 		panic("Sub() requires at least 2 arguments")
 	}
+
 	sub := vals[0]
 	for _, val := range vals[1:] {
 		sub -= val
 	}
+
 	return sub
 }
 
+//nolint:cyclop
 /*
 SubRuntime is a runtime version of arithmetic.Sub.
 */

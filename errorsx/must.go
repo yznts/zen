@@ -8,6 +8,7 @@ func Must[T any](val T, err error) T {
 	if err != nil {
 		panic(err)
 	}
+
 	return val
 }
 
@@ -18,5 +19,6 @@ func MustRuntime(val any, err error) any {
 	if err != nil {
 		panic(err)
 	}
+
 	return val
 }

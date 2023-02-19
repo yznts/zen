@@ -21,6 +21,7 @@ func TestPeriodicFunc(t *testing.T) {
 		counter := 0
 		getter = cache.NewPeriodicFunc(ctx, 10*time.Millisecond, func() (int, error) {
 			counter++
+			// Return current counter
 			return counter, nil
 		})
 	}

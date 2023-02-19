@@ -8,11 +8,13 @@ Usage:
 	Filter([]int{1, 2, 3}, func(v int) bool { return v < 3 }) // []int{1, 2}
 */
 func Filter[T any](slice []T, fn func(v T) bool) []T {
-	var a []T
+	newslice := make([]T, 0)
+
 	for _, v := range slice {
 		if fn(v) {
-			a = append(a, v)
+			newslice = append(newslice, v)
 		}
 	}
-	return a
+
+	return newslice
 }

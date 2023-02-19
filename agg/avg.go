@@ -17,6 +17,8 @@ func Avg[T constraints.Integer | constraints.Float](vals ...T) T {
 	if len(vals) == 0 {
 		panic("Avg() called with no arguments")
 	}
+
 	sum := mathx.Sum(vals...)
+
 	return sum / T(len(vals))
 }

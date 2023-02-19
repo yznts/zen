@@ -1,25 +1,11 @@
-run:
-  skip-dirs:
-    - kyoto-old
-    - resolib
 
 linters:
   enable-all: true
   disable:
-    - exhaustivestruct
-    - exhaustruct
-    - forcetypeassert
-    - nonamedreturns
-    - tagliatelle
-    - varnamelen
-    - wrapcheck
-    - gocognit
-    - gocyclo
-    - cyclop
-    - nakedret
-    - nlreturn
-    - ireturn
-    - funlen
-    - gomnd
-    - noctx
-    - wsl
+    - ireturn # Often gives false-positive on generics
+    - noctx # Often we don't actually need a context
+    - exhaustivestruct # Allow missing attributes in struct init
+    - exhaustruct # Allow missing attributes in struct init
+    - wrapcheck # Often we need to return an error as-is
+    - nonamedreturns # No reason to avoid named returns?
+    - varnamelen # we often using "fn" shortcut, which is pretty understandable

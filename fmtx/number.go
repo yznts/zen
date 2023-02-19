@@ -1,8 +1,7 @@
 package fmtx
 
 import (
-	"strconv"
-
+	"github.com/kyoto-framework/zen/v3/conv"
 	"golang.org/x/text/language"
 	"golang.org/x/text/message"
 )
@@ -15,9 +14,12 @@ Usage:
 	fmtx.Number(12345.456, 0, "$", "") // "$12,345"
 */
 func Number(number float64, precision int, prefix, suffix string) string {
-	p := strconv.Itoa(precision)
-	v := message.NewPrinter(language.English).Sprintf("%."+p+"f", number)
-	return prefix + v + suffix
+	var (
+		precisionstr = conv.String(precision)
+		numstr       = message.NewPrinter(language.English).Sprintf("%."+precisionstr+"f", number)
+	)
+
+	return prefix + numstr + suffix
 }
 
 /*

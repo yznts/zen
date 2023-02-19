@@ -14,11 +14,13 @@ func Min[T constraints.Ordered](vals ...T) T {
 	if len(vals) == 0 {
 		panic("Min() called with no arguments")
 	}
+
 	min := vals[0]
 	for _, v := range vals {
 		if v < min {
 			min = v
 		}
 	}
+
 	return min
 }

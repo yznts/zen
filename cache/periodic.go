@@ -20,7 +20,9 @@ func NewPeriodicFunc[T any](ctx context.Context, interval time.Duration, fn Peri
 			case <-ctx.Done():
 				return
 			default:
+				// Update cache
 				value, err = fn()
+				// Sleep for interval
 				time.Sleep(interval)
 			}
 		}

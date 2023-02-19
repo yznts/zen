@@ -8,9 +8,10 @@ Usage:
 	Range(1, 5) // []int{1, 2, 3, 4, 5}
 */
 func Range(from, to int) []int {
-	a := make([]int, to-from+1)
+	result := make([]int, to-from+1)
 	for i := 0; i <= to-from; i++ {
-		a[i] = i + from
+		result[i] = i + from
 	}
-	return a
+
+	return result
 }

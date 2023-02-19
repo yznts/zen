@@ -11,13 +11,15 @@ Usage:
 */
 func PointerSlice[T any](slice []any) []*T {
 	newslice := make([]*T, 0, len(slice))
+
 	for _, v := range slice {
 		if v == nil {
 			newslice = append(newslice, nil)
 		} else {
-			cv := v.(T)
+			cv := v.(T) //nolint:forcetypeassert // We expect a panic, if something is wrong
 			newslice = append(newslice, &cv)
 		}
 	}
+
 	return newslice
 }

@@ -17,6 +17,7 @@ func TestCachedFunc(t *testing.T) {
 		counter := 0
 		getter = cache.NewCachedFunc(10*time.Millisecond, func() (int, error) {
 			counter++
+			// Return current couter
 			return counter, nil
 		})
 	}

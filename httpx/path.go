@@ -21,6 +21,7 @@ func (p PathWrapper) Get(index int) string {
 	if len(tokens) < index {
 		return ""
 	}
+
 	return tokens[index]
 }
 
@@ -34,6 +35,7 @@ Usage:
 */
 func (p PathWrapper) GetBefore(token string) string {
 	v, _ := p.GetBeforeWithIndex(token)
+
 	return v
 }
 
@@ -51,10 +53,12 @@ func (p PathWrapper) GetBeforeWithIndex(token string) (string, int) {
 		if i == 0 {
 			continue
 		}
+
 		if ptoken == token {
 			return tokens[i-1], i - 1
 		}
 	}
+
 	return "", -1
 }
 
@@ -68,6 +72,7 @@ Usage:
 */
 func (p PathWrapper) GetAfter(token string) string {
 	v, _ := p.GetAfterWithIndex(token)
+
 	return v
 }
 
@@ -85,10 +90,12 @@ func (p PathWrapper) GetAfterWithIndex(token string) (string, int) {
 		if i+1 == len(tokens) {
 			continue
 		}
+
 		if ptoken == token {
 			return tokens[i+1], i + 1
 		}
 	}
+
 	return "", -1
 }
 

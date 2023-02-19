@@ -1,5 +1,6 @@
 package async
 
+//nolint:varnamelen
 /*
 New runs a function in a goroutine and returns Future object for it.
 */

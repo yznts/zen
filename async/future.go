@@ -117,6 +117,7 @@ func (f *Future[T]) MarshalJSON() ([]byte, error) {
 	if err != nil {
 		return []byte{}, err
 	}
+
 	return json.Marshal(val)
 }
 

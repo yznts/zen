@@ -1,3 +1,4 @@
+//nolint:dupl
 package mathx
 
 import (
@@ -5,6 +6,7 @@ import (
 	"golang.org/x/exp/constraints"
 )
 
+//nolint:gomnd
 /*
 Mul returns the multiplication result of the given values.
 
@@ -17,13 +19,16 @@ func Mul[T constraints.Integer | constraints.Float](vals ...T) T {
 	if len(vals) < 2 {
 		panic("Mul() requires at least 2 arguments")
 	}
+
 	mul := vals[0]
 	for _, val := range vals[1:] {
 		mul *= val
 	}
+
 	return mul
 }
 
+//nolint:cyclop
 /*
 MulRuntime is a runtime version of arithmetic.Mul.
 */

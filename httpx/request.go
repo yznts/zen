@@ -35,6 +35,7 @@ func (r *RequestBuilder) Query(key, val string) *RequestBuilder {
 	q := r.href.Query()
 	q.Set(key, val)
 	r.href.RawQuery = q.Encode()
+
 	return r
 }
 
@@ -42,11 +43,13 @@ func (r *RequestBuilder) Query(key, val string) *RequestBuilder {
 QueryMap sets a query values with a given parameters, stored in map.
 */
 func (r *RequestBuilder) QueryMap(values map[string]string) *RequestBuilder {
-	q := r.href.Query()
+	query := r.href.Query()
 	for k, v := range values {
-		q.Set(k, v)
+		query.Set(k, v)
 	}
-	r.href.RawQuery = q.Encode()
+
+	r.href.RawQuery = query.Encode()
+
 	return r
 }
 
@@ -54,14 +57,16 @@ func (r *RequestBuilder) QueryMap(values map[string]string) *RequestBuilder {
 QueryMapFmt formats and sets query values with a given parameters, stored in map.
 */
 func (r *RequestBuilder) QueryMapFmt(values map[string]any) *RequestBuilder {
-	q := r.href.Query()
+	query := r.href.Query()
 	for k, v := range values {
-		q.Set(
+		query.Set(
 			k,
 			fmt.Sprintf("%v", v),
 		)
 	}
-	r.href.RawQuery = q.Encode()
+
+	r.href.RawQuery = query.Encode()
+
 	return r
 }
 
@@ -70,6 +75,7 @@ QueryValues sets a query as-is.
 */
 func (r *RequestBuilder) QueryValues(values url.Values) *RequestBuilder {
 	r.href.RawQuery = values.Encode()
+
 	return r
 }
 
@@ -82,6 +88,7 @@ If something goes wrong with marshalling, it panics.
 func (r *RequestBuilder) QueryStruct(values any) *RequestBuilder {
 	data := conv.Map(values)
 	r.QueryMapFmt(data)
+
 	return r
 }
 
@@ -92,6 +99,7 @@ Header sets a header with a given parameters.
 */
 func (r *RequestBuilder) Header(key, val string) *RequestBuilder {
 	r.header[key] = []string{val}
+
 	return r
 }
 
@@ -102,6 +110,7 @@ func (r *RequestBuilder) HeaderMap(headers map[string]string) *RequestBuilder {
 	for k, v := range headers {
 		r.header[k] = []string{v}
 	}
+
 	return r
 }
 
@@ -112,6 +121,7 @@ func (r *RequestBuilder) HeaderMapFmt(headers map[string]any) *RequestBuilder {
 	for k, v := range headers {
 		r.header[k] = []string{fmt.Sprintf("%v", v)}
 	}
+
 	return r
 }
 
@@ -120,6 +130,7 @@ HeaderValues sets a headers as-is.
 */
 func (r *RequestBuilder) HeaderValues(headers map[string][]string) *RequestBuilder {
 	r.header = headers
+
 	return r
 }
 
@@ -130,6 +141,7 @@ Body sets a body as-is.
 */
 func (r *RequestBuilder) Body(body io.Reader) *RequestBuilder {
 	r.body = body
+
 	return r
 }
 
@@ -141,6 +153,7 @@ Also, it sets a "Content-Type: text/plain" header.
 func (r *RequestBuilder) Text(body string) *RequestBuilder {
 	r.body = strings.NewReader(body)
 	r.header["Content-Type"] = []string{"text/plain"}
+
 	return r
 }
 
@@ -154,6 +167,7 @@ If body is not serializable with json, it panics.
 func (r *RequestBuilder) JSON(body any) *RequestBuilder {
 	r.body = strings.NewReader(jsonx.String(body))
 	r.header["Content-Type"] = []string{"application/json"}
+
 	return r
 }
 
@@ -165,13 +179,18 @@ Also, it sets a "Content-Type: application/x-www-form-urlencoded" header.
 If body is not serializable with json, it panics.
 */
 func (r *RequestBuilder) Form(body any) *RequestBuilder {
-	data := conv.Map(body)
-	datavalues := url.Values{}
+	var (
+		data       = conv.Map(body)
+		datavalues = url.Values{}
+	)
+
 	for k, v := range data {
 		datavalues.Set(k, fmt.Sprintf("%v", v))
 	}
+
 	r.body = strings.NewReader(datavalues.Encode())
 	r.header["Content-Type"] = []string{"application/x-www-form-urlencoded"}
+
 	return r
 }
 
@@ -183,6 +202,7 @@ Client sets a client, which will be used on request execution
 */
 func (r *RequestBuilder) Client(client *http.Client) *RequestBuilder {
 	r.client = client
+
 	return r
 }
 
@@ -196,6 +216,7 @@ func (r *RequestBuilder) Do() *ResponseWrapper {
 	if r.client == nil {
 		r.client = http.DefaultClient
 	}
+
 	return Response(r.client.Do(r.Build()))
 }
 
@@ -205,6 +226,7 @@ Async wraps a request execution (Do) with an async.Future.
 func (r *RequestBuilder) Async() *async.Future[*ResponseWrapper] {
 	return async.New(func() (*ResponseWrapper, error) {
 		response := r.Do()
+
 		return response, response.err
 	})
 }
@@ -217,7 +239,9 @@ func (r *RequestBuilder) Build() *http.Request {
 	if err != nil {
 		panic(err)
 	}
+
 	request.Header = r.header
+
 	return request
 }
 

@@ -14,5 +14,6 @@ func Index[T any](slice []T, fn func(v T) bool) int {
 			return i
 		}
 	}
+
 	return -1
 }

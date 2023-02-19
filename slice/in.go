@@ -13,9 +13,11 @@ func In[T comparable](val T, slice []T) bool {
 			return true
 		}
 	}
+
 	return false
 }
 
+//nolint:cyclop,forcetypeassert
 /*
 InRuntime is a runtime version of In.
 */

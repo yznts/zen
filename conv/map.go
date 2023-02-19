@@ -25,9 +25,11 @@ Usage:
 */
 func Map(value any) map[string]any {
 	result := map[string]any{}
+
 	errorsx.Must(0, json.Unmarshal(
 		[]byte(jsonx.String(value)),
 		&result,
 	))
+
 	return result
 }

@@ -12,5 +12,6 @@ func Map[T1 any, T2 any](slice []T1, fn func(v T1) T2) []T2 {
 	for i, v := range slice {
 		a[i] = fn(v)
 	}
+
 	return a
 }

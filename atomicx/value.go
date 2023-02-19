@@ -29,6 +29,7 @@ Get locks value mutex and returns current value.
 func (a *Value[T]) Get() T {
 	a.lock.RLock()
 	defer a.lock.RUnlock()
+
 	return a.value
 }
 
@@ -48,9 +49,11 @@ with releasing lock in the end.
 func (a *Value[T]) Context(c func(value T, set func(value T))) {
 	a.lock.Lock()
 	defer a.lock.Unlock()
+
 	setter := func(value T) {
 		a.value = value
 	}
+
 	c(a.value, setter)
 }
 

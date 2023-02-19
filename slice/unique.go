@@ -10,12 +10,15 @@ Usage:
 	Unique([]int{1, 2, 2, 3}, func(v int) int { return v }) // []int{1, 2, 3}
 */
 func Unique[T1 any, T2 comparable](slice []T1, fn func(v T1) T2) []T1 {
+	// Store to determine if value already in resulting slice
 	flags := map[T2]bool{}
+	// Filter input slice
 	return Filter(slice, func(v T1) bool {
 		compareval := fn(v)
 		defer func() {
 			flags[compareval] = true
 		}()
+
 		return !flags[compareval]
 	})
 }

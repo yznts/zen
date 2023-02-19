@@ -123,6 +123,6 @@ var FuncMapStrings = template.FuncMap{
 	"replace":  strings.ReplaceAll,
 	"lower":    strings.ToLower,
 	"upper":    strings.ToUpper,
-	"title":    strings.Title,
+	"title":    strings.Title, //nolint:staticcheck // Need to replace with something
 	"trim":     strings.TrimSpace,
 }

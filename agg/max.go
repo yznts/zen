@@ -14,11 +14,13 @@ func Max[T constraints.Ordered](vals ...T) T {
 	if len(vals) == 0 {
 		panic("Max() called with no arguments")
 	}
+
 	max := vals[0]
 	for _, v := range vals {
 		if v > max {
 			max = v
 		}
 	}
+
 	return max
 }

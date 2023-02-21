@@ -1,15 +1,6 @@
 package conv
 
-/*
-Compose makes a map with the given keys and values.
-Useful as a template function to pass multiple values to a template.
-Based on even and odd values.
-
-Usage:
-
-	// Code
-	zen.Compose("foo", 1, "bar", 2) // map[any]any{"foo": 1, "bar": 2}
-*/
+// Deprecated: Use mapx.Compose instead
 func Compose(vals ...any) map[any]any {
 	m := make(map[any]any)
 

@@ -14,6 +14,7 @@ import (
 	"github.com/kyoto-framework/zen/v3/errorsx"
 	"github.com/kyoto-framework/zen/v3/fmtx"
 	"github.com/kyoto-framework/zen/v3/jsonx"
+	"github.com/kyoto-framework/zen/v3/mapx"
 	"github.com/kyoto-framework/zen/v3/mathx"
 	"github.com/kyoto-framework/zen/v3/regexpx"
 	"github.com/kyoto-framework/zen/v3/slice"
@@ -44,6 +45,7 @@ var FuncMap = template.FuncMap{
 	"errorsx": NestFuncMap(FuncMapErrorsx),
 	"fmtx":    NestFuncMap(FuncMapFmtx),
 	"jsonx":   NestFuncMap(FuncMapJsonx),
+	"mapx":    NestFuncMap(FuncMapMapx),
 	"regexpx": NestFuncMap(FuncMapRegexpx),
 	"slice":   NestFuncMap(FuncMapSlice),
 
@@ -95,6 +97,10 @@ var FuncMapFmtx = template.FuncMap{
 
 var FuncMapJsonx = template.FuncMap{
 	"string": jsonx.String,
+}
+
+var FuncMapMapx = template.FuncMap{
+	"compose": mapx.Compose,
 }
 
 var FuncMapRegexpx = template.FuncMap{

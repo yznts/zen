@@ -3,7 +3,7 @@ package async
 /*
 Interface for runtime await.
 */
-type implementsAwaitRuntime interface {
+type ImplementsAwaitRuntime interface {
 	AwaitRuntime() (any, error)
 }
 
@@ -17,6 +17,6 @@ func Await[T any](f *Future[T]) (T, error) {
 /*
 AwaitRuntime is a runtime version of async.Await.
 */
-func AwaitRuntime(f implementsAwaitRuntime) (any, error) {
+func AwaitRuntime(f ImplementsAwaitRuntime) (any, error) {
 	return f.AwaitRuntime()
 }

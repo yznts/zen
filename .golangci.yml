@@ -9,3 +9,4 @@ linters:
     - wrapcheck # Often we need to return an error as-is
     - nonamedreturns # No reason to avoid named returns?
     - varnamelen # we often using "fn" shortcut, which is pretty understandable
+    - predeclared # when we're wrapping existing functions, we don't want any warnings

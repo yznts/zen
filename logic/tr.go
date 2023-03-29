@@ -9,7 +9,7 @@ Usage:
 
 	zen.Tr(false, "asd", "qwe") // string{"qwe"}
 */
-func Tr[T comparable](condition bool, v1, v2 T) T {
+func Tr[T any](condition bool, v1, v2 T) T {
 	if condition {
 		return v1
 	}

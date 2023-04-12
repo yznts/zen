@@ -32,7 +32,7 @@ func Numeral(number float64, precision int) string {
 	case number >= step1M:
 		return fmt.Sprintf("%."+p+"fM", number/step1M)
 	case number >= step10K:
-		return fmt.Sprintf("%.0fK", number/step10K)
+		return fmt.Sprintf("%.0fK", number/1000)
 	case number >= step1K:
 		return fmt.Sprintf("%."+p+"fK", number/step1K)
 	default:

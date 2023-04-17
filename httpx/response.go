@@ -136,7 +136,7 @@ func (r *ResponseWrapper) Unmarshal(target any) *ResponseWrapper {
 		// Write data
 		*target.(*string) = string(data) //nolint:forcetypeassert
 	default:
-		panic("content type is not supported")
+		r.err = fmt.Errorf("unsupported content type: %s", r.Header.Get("Content-Type"))
 	}
 	// Return wrapper
 	return r

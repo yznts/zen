@@ -1,5 +1,7 @@
 package async
 
+import "sync"
+
 /*
 Map returns a new slice with the results of applying the given function to each element in the given slice.
 Asynchronous version of slice.Map. Please note, it's not always faster! Goroutines allocation have own cost.
@@ -15,11 +17,17 @@ Usage:
 func Map[T1 any, T2 any](slice []T1, fn func(v T1) T2) []T2 {
 	newslice := make([]T2, len(slice))
 
+	wg := sync.WaitGroup{}
+	wg.Add(len(slice))
+
 	for i, v := range slice {
-		go func(i int, v T1) {
+		go func(i int, v T1, wg *sync.WaitGroup) {
+			defer wg.Done()
 			newslice[i] = fn(v)
-		}(i, v)
+		}(i, v, &wg)
 	}
+
+	wg.Wait()
 
 	return newslice
 }

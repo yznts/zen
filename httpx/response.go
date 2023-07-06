@@ -107,14 +107,19 @@ func (r *ResponseWrapper) Text() string {
 
 /*
 Unmarshal detects response type and decodes it into target.
+Have an optional mime parameter to force response type.
 If response type is not supported, or there is an error during decoding,
 chain execution will be stopped.
 Returns wrapper for chaining.
 */
-func (r *ResponseWrapper) Unmarshal(target any) *ResponseWrapper {
+func (r *ResponseWrapper) Unmarshal(target any, mime ...string) *ResponseWrapper {
 	// Check error status
 	if r.err != nil {
 		return r
+	}
+	// Force mime type
+	if len(mime) > 0 {
+		r.Header.Set("Content-Type", mime[0])
 	}
 	// Process response
 	switch strings.Split(r.Header.Get("Content-Type"), ";")[0] {

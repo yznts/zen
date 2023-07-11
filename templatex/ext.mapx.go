@@ -1,7 +1,7 @@
 package templatex
 
 import (
-	"text/template"
+	"html/template"
 
 	"github.com/kyoto-framework/zen/v3/mapx"
 )

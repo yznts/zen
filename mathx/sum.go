@@ -1,7 +1,7 @@
 package mathx
 
 import (
-	"github.com/kyoto-framework/zen/v3/cast"
+	"go.kyoto.codes/zen/v3/cast"
 	"golang.org/x/exp/constraints"
 )
 

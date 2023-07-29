@@ -8,7 +8,7 @@ import (
 	"net/http/httputil"
 	"strings"
 
-	"github.com/kyoto-framework/zen/v3/errorsx"
+	"go.kyoto.codes/zen/v3/errorsx"
 )
 
 /*

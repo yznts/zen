@@ -1,6 +1,6 @@
 package mapx
 
-import "github.com/kyoto-framework/zen/v3/slice"
+import "go.kyoto.codes/zen/v3/slice"
 
 /*
 Keep reverses logic of mapx.Delete.

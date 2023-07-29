@@ -3,7 +3,7 @@ package jsonx
 import (
 	"encoding/json"
 
-	"github.com/kyoto-framework/zen/v3/errorsx"
+	"go.kyoto.codes/zen/v3/errorsx"
 )
 
 /*

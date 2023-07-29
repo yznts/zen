@@ -3,7 +3,7 @@ package b64
 import (
 	"encoding/base64"
 
-	"github.com/kyoto-framework/zen/v3/errorsx"
+	"go.kyoto.codes/zen/v3/errorsx"
 )
 
 /*

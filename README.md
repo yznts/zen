@@ -10,7 +10,7 @@
 </p>
 
 ```go
-import "github.com/kyoto-framework/zen/v3"
+import "go.kyoto.codes/zen/v3"
 ```
 
 It's a common situation when simple things drive you crazy like missing ternary operator, atomic operations that take at least 3 lines, dealing with complex loops due to missing map/filter, or having to deal with goroutines and synchronization even for simple things.

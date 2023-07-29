@@ -3,7 +3,7 @@ package fmtx
 import (
 	"fmt"
 
-	"github.com/kyoto-framework/zen/v3/conv"
+	"go.kyoto.codes/zen/v3/conv"
 )
 
 /*

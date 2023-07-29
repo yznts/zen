@@ -3,7 +3,7 @@ package templatex
 import (
 	"html/template"
 
-	"github.com/kyoto-framework/zen/v3/jsonx"
+	"go.kyoto.codes/zen/v3/jsonx"
 )
 
 /*

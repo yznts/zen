@@ -7,10 +7,10 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/kyoto-framework/zen/v3/async"
-	"github.com/kyoto-framework/zen/v3/conv"
-	"github.com/kyoto-framework/zen/v3/errorsx"
-	"github.com/kyoto-framework/zen/v3/jsonx"
+	"go.kyoto.codes/zen/v3/async"
+	"go.kyoto.codes/zen/v3/conv"
+	"go.kyoto.codes/zen/v3/errorsx"
+	"go.kyoto.codes/zen/v3/jsonx"
 )
 
 /*

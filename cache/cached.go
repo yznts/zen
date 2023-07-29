@@ -3,17 +3,18 @@ package cache
 import "time"
 
 /*
-Cached function type.
+CachedFunc is a cached function wrapper with exprire duration setting.
+Consider it as a cached getter.
+As far as CachedFunc doesn't support functions with arguments
+(it will require much more effort and complications),
+you'll need to create cached getter for each argument set.
+At least, until the creation of more advanced cached builder.
 */
 type CachedFunc[T any] func() (T, error)
 
 /*
-NewCachedFunc is a function wrapper with exprire duration setting.
-Consider it as a cached getter builder.
-As far as NewCachedFunc doesn't support functions with arguments
-(it will require much more effort and complications),
-you'll need to create cached getter for each argument set.
-At least, until the creation of more advanced cached builder.
+NewCachedFunc is a CachedFunc builder.
+Check CachedFunc for details.
 
 Usage:
 

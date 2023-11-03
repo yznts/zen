@@ -12,6 +12,10 @@ around existing slice zen package.
 */
 type SliceExtension struct{}
 
+func (e *SliceExtension) New(vals ...any) []any {
+	return vals
+}
+
 func (e *SliceExtension) In(val any, sliceval any) bool {
 	return slice.InRuntime(val, sliceval)
 }
@@ -22,6 +26,7 @@ func (e *SliceExtension) Range(from, to int) []int {
 
 func (e *SliceExtension) FuncMap() template.FuncMap {
 	return template.FuncMap{
+		"new":      e.New,
 		"in":       e.In,
 		"newrange": e.Range,
 	}

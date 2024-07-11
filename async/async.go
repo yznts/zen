@@ -17,6 +17,13 @@ func New[T any](fn func() (T, error)) *Future[T] {
 		future.value <- value
 		// Close value channel
 		close(future.value)
+		// Call hooks
+		if future.onthen != nil {
+			future.onthen(value)
+		}
+		if future.oncatch != nil {
+			future.oncatch(err)
+		}
 	}()
 	// Return future
 	return &future

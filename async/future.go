@@ -29,6 +29,9 @@ type Future[T any] struct {
 	value chan T
 	cache *T
 	err   error
+
+	onthen func(T)
+	oncatch func(error)
 }
 
 /*

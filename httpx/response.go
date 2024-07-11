@@ -26,10 +26,11 @@ Must is a chain closer.
 Ensures that there was no errors in processing chain.
 If not, it panics.
 */
-func (r *ResponseWrapper) Must() {
+func (r *ResponseWrapper) Must() *ResponseWrapper {
 	if r.err != nil {
 		panic(r.err)
 	}
+	return r
 }
 
 /*

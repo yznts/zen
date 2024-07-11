@@ -22,8 +22,7 @@ type ResponseWrapper struct {
 }
 
 /*
-Must is a chain closer.
-Ensures that there was no errors in processing chain.
+Must ensures that there was no errors in processing chain.
 If not, it panics.
 */
 func (r *ResponseWrapper) Must() *ResponseWrapper {

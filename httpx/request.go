@@ -146,11 +146,11 @@ func (r *RequestBuilder) Body(body io.Reader) *RequestBuilder {
 }
 
 /*
-Text wraps a given string body parameter with an io.Reader
+BodyText wraps a given string body parameter with an io.Reader
 and sets as a request body.
 Also, it sets a "Content-Type: text/plain" header.
 */
-func (r *RequestBuilder) Text(body string) *RequestBuilder {
+func (r *RequestBuilder) BodyText(body string) *RequestBuilder {
 	r.body = strings.NewReader(body)
 	r.header["Content-Type"] = []string{"text/plain"}
 
@@ -158,13 +158,13 @@ func (r *RequestBuilder) Text(body string) *RequestBuilder {
 }
 
 /*
-JSON transforms given object into json,
+BodyJson transforms given object into json,
 wraps it with an io.Reader
 and sets as a request body.
 Also, it sets a "Content-Type: application/json" header.
 If body is not serializable with json, it panics.
 */
-func (r *RequestBuilder) JSON(body any) *RequestBuilder {
+func (r *RequestBuilder) BodyJson(body any) *RequestBuilder {
 	r.body = strings.NewReader(jsonx.String(body))
 	r.header["Content-Type"] = []string{"application/json"}
 
@@ -172,13 +172,13 @@ func (r *RequestBuilder) JSON(body any) *RequestBuilder {
 }
 
 /*
-Form transforms given struct into url encoded string,
+BodyForm transforms given struct into url encoded string,
 wraps it with an io.Reader
 and sets as a request body.
 Also, it sets a "Content-Type: application/x-www-form-urlencoded" header.
 If body is not serializable with json, it panics.
 */
-func (r *RequestBuilder) Form(body any) *RequestBuilder {
+func (r *RequestBuilder) BodyForm(body any) *RequestBuilder {
 	var (
 		data       = conv.Map(body)
 		datavalues = url.Values{}
@@ -192,6 +192,33 @@ func (r *RequestBuilder) Form(body any) *RequestBuilder {
 	r.header["Content-Type"] = []string{"application/x-www-form-urlencoded"}
 
 	return r
+}
+
+/*
+Deprecated: use BodyText instead.
+Backward compatibility alias.
+*/
+func (r *RequestBuilder) Text(body string) *RequestBuilder {
+	return r.BodyText(body)
+}
+
+/*
+Deprecated: use BodyJson instead.
+Backward compatibility alias.
+*/
+func (r *RequestBuilder) JSON(body any) *RequestBuilder {
+	r.body = strings.NewReader(jsonx.String(body))
+	r.header["Content-Type"] = []string{"application/json"}
+
+	return r
+}
+
+/*
+Deprecated: use BodyForm instead.
+Backward compatibility alias.
+*/
+func (r *RequestBuilder) Form(body any) *RequestBuilder {
+	return r.BodyForm(body)
 }
 
 // Other values

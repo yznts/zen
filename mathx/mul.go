@@ -12,8 +12,8 @@ Mul returns the multiplication result of the given values.
 
 Usage:
 
-	arithmetic.Mul(1, 2, 3) // 6
-	arithmetic.Mul([]float64{3.4, 6.5, 4.3}...) // 95.03
+	mathx.Mul(1, 2, 3) // 6
+	mathx.Mul([]float64{3.4, 6.5, 4.3}...) // 95.03
 */
 func Mul[T constraints.Integer | constraints.Float](vals ...T) T {
 	if len(vals) < 2 {

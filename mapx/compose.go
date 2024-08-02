@@ -8,7 +8,7 @@ Based on even and odd values.
 Usage:
 
 	// Code
-	zen.Compose("foo", 1, "bar", 2) // map[any]any{"foo": 1, "bar": 2}
+	mapx.Compose("foo", 1, "bar", 2) // map[any]any{"foo": 1, "bar": 2}
 */
 func Compose(vals ...any) map[any]any {
 	m := make(map[any]any)

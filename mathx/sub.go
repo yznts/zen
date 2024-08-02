@@ -12,8 +12,8 @@ Sub returns the subtraction of the given values from the first one.
 
 Usage:
 
-	arithmeric.Sub(4, 2, 1) // 1
-	arithmetic.Sub([]float64{5.4, 3, 1}...) // 1.4
+	mathx.Sub(4, 2, 1) // 1
+	mathx.Sub([]float64{5.4, 3, 1}...) // 1.4
 */
 func Sub[T constraints.Integer | constraints.Float](vals ...T) T {
 	if len(vals) < 2 {

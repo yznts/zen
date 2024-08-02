@@ -1,4 +1,4 @@
 /*
-errorsx - a package with a common error processing.
+errorsx - deprecated package, use errx instead.
 */
 package errorsx

@@ -11,12 +11,10 @@ import (
 var ErrUnmarshalTarget = errors.New("failed to encode form values to struct, non struct type is given")
 
 /*
-QueryWrapper type is a wrapper for url.Values.
-It provides a few useful extra methods.
+Query type is a wrapper for url.Values.
+It provides a few useful extra methods to operate with query.
 */
-type QueryWrapper struct {
-	url.Values
-}
+type Query url.Values
 
 //nolint:all
 /*
@@ -33,7 +31,7 @@ Example:
 	q, _ := url.ParseQuery("foo=asdqwe&bar=123")
 	kyoto.Query(q).Unmarshal(&target)
 */
-func (q QueryWrapper) Unmarshal(target any) error {
+func (q Query) Unmarshal(target any) error {
 	// Get target reflection value
 	ob := reflect.ValueOf(target)
 	if ob.Kind() == reflect.Ptr {
@@ -58,14 +56,14 @@ func (q QueryWrapper) Unmarshal(target any) error {
 			// If that field exists in the arg and convert its type.
 			// Tags are of the type `tagname,attribute`
 			tag = strings.Split(tag, ",")[0]
-			if _, ok := q.Values[tag]; !ok {
+			if _, ok := q[tag]; !ok {
 				continue
 			}
 
 			// The struct field is a slice type.
 			if f.Kind() == reflect.Slice {
 				var (
-					vals    = q.Values[tag]
+					vals    = q[tag]
 					numVals = len(vals)
 				)
 
@@ -74,7 +72,7 @@ func (q QueryWrapper) Unmarshal(target any) error {
 
 				// If it's a []byte slice (=[]uint8), assign here.
 				if f.Type().Elem().Kind() == reflect.Uint8 {
-					br := q.Get(tag)
+					br := url.Values(q).Get(tag)
 					b := make([]byte, len(br))
 					copy(b, br)
 					f.SetBytes(b)
@@ -88,7 +86,7 @@ func (q QueryWrapper) Unmarshal(target any) error {
 				}
 				f.Set(sl)
 			} else {
-				querySetVal(f, q.Get(tag))
+				querySetVal(f, url.Values(q).Get(tag))
 			}
 		}
 	}
@@ -123,12 +121,4 @@ func querySetVal(f reflect.Value, val string) bool {
 		return false
 	}
 	return true
-}
-
-/*
-Query wraps a given url.Values into QueryWrapper
-to provide extra methods.
-*/
-func Query(q url.Values) QueryWrapper {
-	return QueryWrapper{q}
 }

@@ -4,13 +4,14 @@ import "sync"
 
 /*
 Map returns a new slice with the results of applying the given function to each element in the given slice.
-Asynchronous version of slice.Map. Please note, it's not always faster! Goroutines allocation have own cost.
+Asynchronous version of slice.Map. Please note, it's not always faster!
+Goroutines allocation and synchronization have own cost.
 
 Usage:
 
 	// Let's assume we have some workload in Workload function, which returns an integer.
 
-	results := async.Map([]string{"one", "two", "three"}, func(v string) int {
+	results := async.Map(slice.Range(1, 1000), func(v int) int {
 		return Workload(v)
 	})
 */

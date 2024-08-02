@@ -1,7 +1,9 @@
 package slice
 
 /*
-In returns true if the given value is in the given slice.
+Deprecated: use Contains() instead.
+It was deprecated because of the inconsistency in argument order
+between this function and the rest of the functions in the package.
 
 Usage:
 
@@ -19,7 +21,9 @@ func In[T comparable](val T, slice []T) bool {
 
 //nolint:cyclop,forcetypeassert
 /*
-InRuntime is a runtime version of In.
+Deprecated: use ContainsRuntime() instead.
+It was deprecated because of the inconsistency in argument order
+between this function and the rest of the functions in the package.
 */
 func InRuntime(val any, slice any) bool {
 	switch val := val.(type) {

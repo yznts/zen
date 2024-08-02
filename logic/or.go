@@ -9,11 +9,13 @@ Usage:
 
 	zen.Or(0, 1) // 1
 */
-func Or[T comparable](a, b T) T {
-	var c T
-	if a != c {
-		return a
+func Or[T comparable](vals ...T) T {
+	var def T
+	for _, v := range vals {
+		if v != def {
+			return v
+		}
 	}
 
-	return b
+	return def
 }

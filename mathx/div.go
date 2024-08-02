@@ -13,8 +13,8 @@ Makes no sense in unual use-cases, but useful in templates.
 
 Usage:
 
-	arithmetic.Div(5, 2, 2) // 1.25
-	arithmetic.Div([]int{5, 2, 2}...) // 1.25
+	mathx.Div(5, 2, 2) // 1.25
+	mathx.Div([]int{5, 2, 2}...) // 1.25
 */
 func Div[T constraints.Integer | constraints.Float](vals ...T) T {
 	if len(vals) < 2 {

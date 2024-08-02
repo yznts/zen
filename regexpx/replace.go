@@ -3,6 +3,7 @@ package regexpx
 import "regexp"
 
 /*
+Deprecated: use regexp package instead.
 Replace is a replace function similar to strings.ReplaceAll,
 but with regex support.
 */

@@ -11,8 +11,8 @@ Sum returns the sum of the given values.
 
 Usage:
 
-	arithmeric.Sum(4, 2, 1) // 7
-	arithmetic.Sum([]float64{5.4, 3, 1}...) // 9.4
+	mathx.Sum(4, 2, 1) // 7
+	mathx.Sum([]float64{5.4, 3, 1}...) // 9.4
 */
 func Sum[T constraints.Integer | constraints.Float | string](vals ...T) T {
 	if len(vals) < 2 {

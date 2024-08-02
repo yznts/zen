@@ -3,8 +3,7 @@ package templatex
 /*
 Import allows to pack a given struct
 into getter function.
-In that way, you're able to use struct and struct methods
-as funcmap extensions, f.e. "{{ jsonx.String .Value }}".
+In that way, you're able to use struct and struct methods as funcmap extensions.
 
 Usage:
 

@@ -3,7 +3,7 @@ package templatex
 import (
 	"html/template"
 
-	"go.kyoto.codes/zen/v3/conv"
+	"github.com/yznts/zen/v3/conv"
 )
 
 /*

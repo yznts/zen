@@ -1,4 +1,4 @@
-module go.kyoto.codes/zen/v3
+module github.com/yznts/zen/v3
 
 go 1.18
 

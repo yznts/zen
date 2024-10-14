@@ -1,7 +1,7 @@
 package agg
 
 import (
-	"go.kyoto.codes/zen/v3/mathx"
+	"github.com/yznts/zen/v3/mathx"
 	"golang.org/x/exp/constraints"
 )
 

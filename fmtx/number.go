@@ -1,7 +1,7 @@
 package fmtx
 
 import (
-	"go.kyoto.codes/zen/v3/conv"
+	"github.com/yznts/zen/v3/conv"
 	"golang.org/x/text/language"
 	"golang.org/x/text/message"
 )

@@ -3,8 +3,8 @@ package conv
 import (
 	"encoding/json"
 
-	"go.kyoto.codes/zen/v3/errorsx"
-	"go.kyoto.codes/zen/v3/jsonx"
+	"github.com/yznts/zen/v3/errorsx"
+	"github.com/yznts/zen/v3/jsonx"
 )
 
 /*

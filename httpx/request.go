@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
 
 	"github.com/yznts/zen/v3/async"
 	"github.com/yznts/zen/v3/conv"
@@ -18,10 +19,12 @@ RequestBuilder provides set of chainable functions
 to build a request and execute it.
 */
 type RequestBuilder struct {
-	method string
-	href   *url.URL
-	body   io.Reader
-	header map[string][]string
+	method  string
+	href    *url.URL
+	body    io.Reader
+	header  map[string][]string
+	retry   int
+	timeout time.Duration
 
 	client *http.Client
 }
@@ -240,11 +243,25 @@ Do builds an *http.Request and executes it with a provided client.
 If client wasn't provided, uses http.DefaultClient.
 */
 func (r *RequestBuilder) Do() *ResponseWrapper {
+	// Default client
 	if r.client == nil {
 		r.client = http.DefaultClient
 	}
-
-	return Response(r.client.Do(r.Build()))
+	// Set client timeout
+	if r.timeout != 0 {
+		r.client.Timeout = r.timeout
+	}
+	// Make request with retry
+	var response *ResponseWrapper
+	for i := 0; i < r.retry; i++ {
+		response = Response(r.client.Do(r.Build()))
+		// Return success response
+		if response.Error() == nil {
+			return response
+		}
+	}
+	// Return last failed response
+	return response
 }
 
 /*
